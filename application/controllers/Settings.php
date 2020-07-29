@@ -1,11 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Home extends CI_Controller
+class Settings extends CI_Controller
 {
-    public function index()
+    public function __construct()
     {
-        redirect(base_url('home/kab'));
+        parent::__construct();
+        $this->load->library('form_validation');
     }
 
     function _template($loc, $data)
@@ -16,11 +17,9 @@ class Home extends CI_Controller
         $this->load->view('template/footer');
     }
 
-    public function kab($id = '')
+    public function users()
     {
-        $data['header'] = 'Kabupaten Asahan';
-        $data['id_kab'] = $id;
-
-        $this->_template('index', $data);
+        $data['header'] = 'Manajemen Akun';
+        $this->_template('settings/akunbaru', $data);
     }
 }

@@ -33,11 +33,19 @@ class Auth extends CI_Controller
     {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
-
-        if ($username == 'admin' && $password == 'admin1') {
-            echo 'Berhasil masuk ke Dashboard admin';
+        $user = $this->db->get_where('tb_user', ['username' => $username])->row_array();
+        if ($user) {
+            if (password_verify($password, $user['password'])) {
+                $data = [
+                    'id_kab' => $user['id_kab'],
+                    'role' => $user['id_role']
+                ];
+            } else {
+                $this->session->set_flashdata('messege', '<div class="alert alert-danger p-2" role="alert">Username atau password salah!</div>');
+                redirect(base_url('auth/login'));
+            }
         } else {
-            $this->session->set_flashdata('messege', '<div class="alert alert-danger p-2" role="alert">Username dan password salah!</div>');
+            $this->session->set_flashdata('messege', '<div class="alert alert-danger p-2" role="alert">Username tidak ditemukan!</div>');
             redirect(base_url('auth/login'));
         }
     }
