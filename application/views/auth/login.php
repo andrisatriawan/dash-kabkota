@@ -25,11 +25,12 @@
                                 <div class="form-group">
                                     <label for="password" class="sr-only">Password</label>
                                     <div class="position-relative has-icon-right">
-                                        <input type="password" id="password" class="form-control input-shadow" placeholder="Password" name="password">
+                                        <input type="password" id="password" class="form-control input-shadow" placeholder="Password" name="password" oninput="cekpassword()">
                                         <div class="form-control-position">
                                             <i class="icon-lock"></i>
                                         </div>
                                     </div>
+                                    <small class="text-danger pl-3" id="pesan" style="display: none;">Panjang password minimal 8 karakter</small>
                                     <?= form_error('password', '<small class="text-danger pl-3">', '</small>') ?>
                                 </div>
                                 <button type="submit" class="btn btn-light btn-block waves-effect waves-light">Login</button>
@@ -46,3 +47,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    function cekpassword() {
+        var password = document.getElementById('password').value;
+        var pesan = document.getElementById('pesan');
+
+        if (password.length < 8) {
+            pesan.style.display = "inline";
+        } else if (password = '') {
+            pesan.style.display = "none";
+        } else {
+            pesan.style.display = "none";
+        }
+    }
+</script>

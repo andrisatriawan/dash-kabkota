@@ -11,3 +11,11 @@
 .content-wrapper {
 	padding: 60px 0 0 0;
 }
+
+.as-hidden {
+	display: none;
+}
+
+.as-show {
+	visibility: visible;
+}

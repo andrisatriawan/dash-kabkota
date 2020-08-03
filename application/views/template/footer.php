@@ -17,12 +17,12 @@
 
 <!-- Index js -->
 <script src="<?= base_url() ?>assets/js/index.js"></script>
+<script src="<?= base_url() ?>assets/js/ajax.js"></script>
 
 <script type="text/javascript">
 	$('.carousel').carousel({
 		interval: 5000
 	});
-
 </script>
 </body>
 
