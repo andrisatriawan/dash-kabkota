@@ -37,11 +37,15 @@ class Auth extends CI_Controller
         if ($user) {
             if (password_verify($password, $user['password'])) {
                 $data = [
+                    'username' => $user['username'],
                     'id_kab' => $user['id_kab'],
                     'role' => $user['id_role']
                 ];
+
+                $this->session->set_userdata($data);
+
                 $this->session->set_flashdata('messege', '<div class="alert alert-success p-2" role="alert">Berhasil Login!</div>');
-                redirect(base_url('auth/login'));
+                redirect(base_url('dashboard'));
             } else {
                 $this->session->set_flashdata('messege', '<div class="alert alert-danger p-2" role="alert">Username atau password salah!</div>');
                 redirect(base_url('auth/login'));

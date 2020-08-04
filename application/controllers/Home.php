@@ -3,6 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Home extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('M_home');
+    }
+
     public function index()
     {
         redirect(base_url('home/kab'));
@@ -18,9 +24,17 @@ class Home extends CI_Controller
 
     public function kab($id = '')
     {
-        $data['header'] = 'Kabupaten Asahan';
-        $data['id_kab'] = $id;
+        $kab = $this->M_home->getKab($id);
 
-        $this->_template('index', $data);
+        if ($kab->num_rows() == 1) {
+            $data['header'] = $kab->row('nama');
+            $data['kab'] = $kab->row_array();
+            $data['info'] = $this->db->get_where('tb_informasi', ['id_kab' => $id])->row_array();
+
+            $this->_template('index', $data);
+        } else {
+            $this->load->view('404');
+            $this->load->view('template/footer');
+        }
     }
 }

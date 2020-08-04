@@ -10,9 +10,8 @@
 						<div class="img-card">
 							<img src="<?= base_url() ?>assets/images/asahan.gif" alt="profile-image" class="img-fluid img-thumbnail">
 						</div>
-						<h5 class="card-title"><?= $id_kab; ?></h5>
-						<p class="card-text">Jl. Jend. Sudirman No. 5, Kel. Makar Baru, Kec. Kisaran Barat, Kab.
-							Asahan, 21211</p>
+						<h5 class="card-title"><?= $kab['nama']; ?></h5>
+						<p class="card-text"><?= $info['alamat_kantor'] ?></p>
 						<div class="icon-block">
 							<a href="javascript:void();"><i class="fa fa-facebook bg-facebook text-white"></i></a>
 							<a href="javascript:void();"> <i class="fa fa-twitter bg-twitter text-white"></i></a>
@@ -47,7 +46,7 @@
 										<hr>
 										<h6>Kepala Daerah</h6>
 										<p>
-											H. Surya, B.Sc
+											<?= $info['kepala_daerah'] ?>
 										</p>
 										<h6>Wakil Kepala Daerah</h6>
 										<p>
