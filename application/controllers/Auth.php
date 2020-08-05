@@ -6,6 +6,7 @@ class Auth extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
         $this->load->library('form_validation');
     }
 
@@ -16,6 +17,10 @@ class Auth extends CI_Controller
 
     public function login()
     {
+        $cek_login = $this->db->get_where('tb_users', ['username' => $this->session->userdata('username')])->num_rows();
+        if ($cek_login != 0) {
+            redirect(base_url('dashboard'));
+        }
         $data['header'] = 'Login';
         $this->form_validation->set_rules('username', 'username', 'required|trim');
         $this->form_validation->set_rules('password', 'password', 'required|trim|min_length[6]');
@@ -54,5 +59,15 @@ class Auth extends CI_Controller
             $this->session->set_flashdata('messege', '<div class="alert alert-danger p-2" role="alert">Username tidak ditemukan!</div>');
             redirect(base_url('auth/login'));
         }
+    }
+
+    public function logout()
+    {
+        $userdata = ['username', 'id_kab', 'role'];
+        $this->session->unset_userdata('username');
+        $this->session->unset_userdata('is_kab');
+        $this->session->unset_userdata('role');
+
+        redirect(base_url('auth'));
     }
 }

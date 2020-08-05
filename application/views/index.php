@@ -1,5 +1,8 @@
+<div class="clearfix"></div>
+
 <div class="content-wrapper" style="height: 100%;">
 	<div class="container-fluid">
+
 		<div class="row mt-3">
 			<div class="col-lg-4">
 				<div class="card profile-card-2">
@@ -7,16 +10,17 @@
 						<img class="img-fluid" src="<?= base_url() ?>assets/images/gedung-asahan.jpg" alt="Card image cap">
 					</div>
 					<div class="card-body pt-6">
+						<!-- <img src="<?= base_url() ?>assets/images/asahan.gif" alt="profile-image" class="profile"> -->
 						<div class="img-card">
 							<img src="<?= base_url() ?>assets/images/asahan.gif" alt="profile-image" class="img-fluid img-thumbnail">
 						</div>
 						<h5 class="card-title"><?= $kab['nama']; ?></h5>
 						<p class="card-text"><?= $info['alamat_kantor'] ?></p>
 						<div class="icon-block">
-							<a href="javascript:void();"><i class="fa fa-facebook bg-facebook text-white"></i></a>
-							<a href="javascript:void();"> <i class="fa fa-twitter bg-twitter text-white"></i></a>
-							<a href="javascript:void();"> <i class="fa fa-instagram bg-instagram text-white"></i></a>
-							<a href="javascript:void();"> <i class="fa fa-envelope bg-envelope text-white"></i></a>
+							<a href="javascript:void();"><i class="fab fa-facebook-square bg-facebook text-white"></i></a>
+							<a href="javascript:void();"> <i class="fab fa-twitter bg-twitter text-white"></i></a>
+							<a href="javascript:void();"><i class="fab fa-instagram bg-instagram text-white"></i></a>
+							<a href="javascript:void();"> <i class="fas fa-envelope bg-envelope text-white"></i></a>
 						</div>
 					</div>
 				</div>
@@ -28,7 +32,7 @@
 						<ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
 							<li class="nav-item">
 								<a href="javascript:void();" data-target="#informasi" data-toggle="pill" class="nav-link active">
-									<i class="fa fa-info-circle"></i> <span class="hidden-xs">Informasi
+									<i class="fas fa-info-circle"></i> <span class="hidden-xs">Informasi
 										Umum</span>
 								</a>
 							</li>
@@ -114,8 +118,10 @@
 				</div>
 			</div>
 		</div>
+
+		<!--start overlay-->
+		<div class="overlay toggle-menu"></div>
+		<!--end overlay-->
 	</div>
-	<!--start overlay-->
-	<div class="overlay toggle-menu"></div>
-	<!--end overlay-->
+
 </div>

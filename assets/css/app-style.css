@@ -2399,7 +2399,7 @@ table.grid td {
 
 .top-icon.nav-tabs .nav-link i{
 	margin: 0px;
-	font-weight: 500;
+	/* font-weight: 500; */
 	display: block;
     font-size: 20px;
     padding: 5px 0;

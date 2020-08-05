@@ -34,7 +34,25 @@ class Home extends CI_Controller
             $this->_template('index', $data);
         } else {
             $this->load->view('404');
-            $this->load->view('template/footer');
+            // $this->load->view('template/footer');
         }
+    }
+
+    public function test()
+    {
+        $data['header'] = 'Laman coba';
+        $this->load->view('ex/template/header');
+        $this->load->view('ex/template/sidebar');
+        $this->load->view('ex/index', $data);
+        $this->load->view('ex/template/footer');
+    }
+
+    public function laman()
+    {
+        $data['header'] = 'Laman coba';
+        $this->load->view('ex/template/header');
+        $this->load->view('ex/template/sidebar');
+        $this->load->view('ex/laman', $data);
+        $this->load->view('ex/template/footer');
     }
 }

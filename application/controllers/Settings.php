@@ -6,13 +6,17 @@ class Settings extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $cek_login = $this->db->get_where('tb_users', ['username' => $this->session->userdata('username')])->num_rows();
+        if ($cek_login == 0) {
+            redirect(base_url('auth'));
+        }
         $this->load->library('form_validation');
     }
 
     function _template($loc, $data)
     {
         $this->load->view('template/header', $data);
-        $this->load->view('template/sidebar');
+        $this->load->view('template/admin/sidebar');
         $this->load->view($loc, $data);
         $this->load->view('template/footer');
     }
@@ -52,5 +56,12 @@ class Settings extends CI_Controller
         } else {
             echo "<option value=''>Pilih</option>";
         }
+    }
+
+    public function menu()
+    {
+        $data['header'] = 'Manajemen Menu';
+        $data['role'] = $this->db->get('tb_role')->result_array();
+        $this->_template('settings/menu', $data);
     }
 }

@@ -1,11 +1,10 @@
 	<!-- Start wrapper-->
-	<div id="wrapper" style="height: 100%;">
+	<div id="wrapper">
 		<!--Start sidebar-wrapper-->
 		<div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
 			<div class="brand-logo">
 				<a href="index.html">
-					<img src="<?= base_url() ?>assets/images/asahan.gif" class="logo-icon" alt="logo icon">
-					<h5 class="logo-text">Kab. Asahan</h5>
+					<h5 class="logo-text">DASHBOARD KAB/KOTA</h5>
 				</a>
 			</div>
 			<ul class="sidebar-menu do-nicescrol">
@@ -27,7 +26,7 @@
 				foreach ($menu as $m) :
 				?>
 					<li>
-						<a href="<?= $m['link'] ?>">
+						<a href="<?= base_url($m['link']) ?>">
 							<i class="<?= $m['icon'] ?>"></i> <span><?= $m['judul_menu'] ?></span>
 						</a>
 					</li>
@@ -35,8 +34,8 @@
 				endforeach;
 				?>
 				<li>
-					<a href="">
-						<i class="fa fa-sign-out"></i> <span>Logout</span>
+					<a href="<?= base_url('auth/logout') ?>">
+						<i class="fas fa-sign-out-alt"></i> <span>Logout</span>
 					</a>
 				</li>
 			</ul>

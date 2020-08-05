@@ -8,11 +8,13 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<title><?= $header; ?></title>
+
 	<!-- loader-->
 	<link href="<?= base_url() ?>assets/css/pace.min.css" rel="stylesheet" />
 	<script src="<?= base_url() ?>assets/js/pace.min.js"></script>
 	<!--favicon-->
 	<link rel="icon" href="<?= base_url() ?>" type="image/x-icon">
+
 	<!-- simplebar CSS-->
 	<link href="<?= base_url() ?>assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
 	<!-- Bootstrap core CSS-->
@@ -26,6 +28,8 @@
 	<!-- Custom Style-->
 	<link href="<?= base_url() ?>assets/css/app-style.css" rel="stylesheet" />
 	<link href="<?= base_url() ?>assets/css/style.css" rel="stylesheet" />
+	<!-- Font Awesome -->
+	<link href="<?= base_url() ?>assets/css/fa/css/all.css" rel="stylesheet" />
 
 </head>
 
