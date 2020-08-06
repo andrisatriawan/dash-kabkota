@@ -3,7 +3,6 @@
 
 
 <!-- Bootstrap core JavaScript-->
-<script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
 <script src="<?= base_url() ?>assets/js/popper.min.js"></script>
 <script src="<?= base_url() ?>assets/js/bootstrap.min.js"></script>
 
@@ -16,6 +15,7 @@
 <script src="<?= base_url() ?>assets/js/app-script.js"></script>
 
 <script src="<?= base_url() ?>assets/js/ajax.js"></script>
+<script src="<?= base_url() ?>assets/js/script.js"></script>
 
 <script type="text/javascript">
 	$('.carousel').carousel({

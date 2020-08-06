@@ -64,4 +64,24 @@ class Settings extends CI_Controller
         $data['role'] = $this->db->get('tb_role')->result_array();
         $this->_template('settings/menu', $data);
     }
+
+    public function simpanmenu()
+    {
+        $this->form_validation->set_rules('judul_menu', 'Judul Menu', 'trim|required');
+        $this->form_validation->set_rules('link', 'Link', 'trim|required');
+        $this->form_validation->set_rules('icon', 'Icon', 'trim|required');
+
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('pesan', '<div class="alert alert-danger p-2" role="alert">Gagal disimpan!</div>');
+            $this->menu();
+        } else {
+            $data = [
+                'judul_menu' => $this->input->post('judul_menu'),
+                'link' => $this->input->post('link'),
+                'icon' => $this->input->post('icon')
+            ];
+            $this->db->insert('tb_menu', $data);
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success p-2" role="alert">Berhasil disimpan!</div>');
+        }
+    }
 }

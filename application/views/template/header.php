@@ -31,6 +31,8 @@
 	<!-- Font Awesome -->
 	<link href="<?= base_url() ?>assets/css/fa/css/all.css" rel="stylesheet" />
 
+	<script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
+
 </head>
 
 <body class="bg-theme bg-theme9" style="height: 100%;">

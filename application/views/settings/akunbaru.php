@@ -63,10 +63,12 @@
                 pesan.style.display = "none";
             }
 
-            if (password.length < 8) {
-                pesan1.style.display = "inline";
-            } else {
+            if (password.length == 0) {
                 pesan1.style.display = "none";
+            } else if (password.length > 7) {
+                pesan1.style.display = "none";
+            } else {
+                pesan1.style.display = "inline";
             }
         }
     </script>
