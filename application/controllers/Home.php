@@ -24,12 +24,16 @@ class Home extends CI_Controller
 
     public function kab($id = '')
     {
+        // echo $id;
         $kab = $this->M_home->getKab($id);
 
+        // echo $kab->num_rows();
+
         if ($kab->num_rows() == 1) {
-            $data['header'] = $kab->row('nama');
-            $data['kab'] = $kab->row_array();
-            $data['info'] = $this->db->get_where('tb_informasi', ['id_kab' => $id])->row_array();
+            $data['header'] = $this->db->get_where('tb_kab', ['id_kab' => $kab->row('id_kab')])->row('nama');
+            $data['kab'] = $this->db->get_where('tb_kab', ['id_kab' => $kab->row('id_kab')])->row_array();;
+            $data['user'] = $kab->row_array();
+            $data['info'] = $this->db->get_where('tb_informasi', ['id_kab' => $kab->row('id_kab')])->row_array();
 
             $this->_template('index', $data);
         } else {
@@ -38,21 +42,23 @@ class Home extends CI_Controller
         }
     }
 
-    public function test()
+    public function page($id_kab, $laman)
     {
-        $data['header'] = 'Laman coba';
-        $this->load->view('ex/template/header');
-        $this->load->view('ex/template/sidebar');
-        $this->load->view('ex/index', $data);
-        $this->load->view('ex/template/footer');
-    }
+        $kab = $this->M_home->getKab($id_kab);
+        $laman = $this->db->get_where('tb_menu', ['link' => $laman]);
 
-    public function laman()
-    {
-        $data['header'] = 'Laman coba';
-        $this->load->view('ex/template/header');
-        $this->load->view('ex/template/sidebar');
-        $this->load->view('ex/laman', $data);
-        $this->load->view('ex/template/footer');
+        if ($laman->num_rows() == 1) {
+            $data['header'] = $this->db->get_where('tb_kab', ['id_kab' => $kab->row('id_kab')])->row('nama');
+            $data['kab'] = $this->db->get_where('tb_kab', ['id_kab' => $kab->row('id_kab')])->row_array();;
+            $data['user'] = $kab->row_array();
+            $data['info'] = $this->db->get_where('tb_informasi', ['id_kab' => $kab->row('id_kab')])->row_array();
+
+            $this->_template('pages', $data);
+        } else {
+            echo 'laman tidak ditemukan';
+        }
+
+
+        // echo 'ini halaman kabupaten ' . $id_kab . ' dan dipanggil halaman ' . $laman;
     }
 }

@@ -7,12 +7,12 @@
 			<div class="col-lg-4">
 				<div class="card profile-card-2">
 					<div class="card-img-block">
-						<img class="img-fluid" src="<?= base_url() ?>assets/images/gedung-asahan.jpg" alt="Card image cap">
+						<img class="img-fluid" src="<?= base_url('assets/images/gedung/') . $info['foto_kantor'] ?>">
 					</div>
 					<div class="card-body pt-6">
-						<!-- <img src="<?= base_url() ?>assets/images/asahan.gif" alt="profile-image" class="profile"> -->
+						<!-- <img src="" alt="profile-image" class="profile"> -->
 						<div class="img-card">
-							<img src="<?= base_url() ?>assets/images/asahan.gif" alt="profile-image" class="img-fluid img-thumbnail">
+							<img src="<?= base_url('assets/images/logo-kab/') . $info['logo'] ?>" class="img-fluid img-thumbnail">
 						</div>
 						<h5 class="card-title"><?= $kab['nama']; ?></h5>
 						<p class="card-text"><?= $info['alamat_kantor'] ?></p>
@@ -36,11 +36,11 @@
 										Umum</span>
 								</a>
 							</li>
-							<li class="nav-item">
+							<!-- <li class="nav-item">
 								<a href="javascript:void();" data-target="#messages" data-toggle="pill" class="nav-link">
 									<i class="fa fa-map"></i> <span class="hidden-xs">Objek Wisata</span>
 								</a>
-							</li>
+							</li> -->
 						</ul>
 						<div class="tab-content p-3">
 							<div class="tab-pane active" id="informasi">
@@ -54,28 +54,25 @@
 										</p>
 										<h6>Wakil Kepala Daerah</h6>
 										<p>
-											-
+											<?= $info['wakil_kepala_daerah'] ?>
 										</p>
 									</div>
 									<div class="col-md-6">
 										<h5>Informasi Geografis</h5>
 										<hr>
 										<h6>Luas Wilayah</h6>
-										<p>3702.21 Km<sup>2</sup></p>
+										<p><?= $info['luas_wilayah'] ?> Km<sup>2</sup></p>
 										<h6>Jumlah Kecamatan</h6>
-										<p>25</p>
+										<p><?= $info['jumlah_kec'] ?></p>
 										<h6>Jumlah Kelurahan</h6>
-										<p>27</p>
+										<p><?= $info['jumlah_kel'] ?></p>
 										<h6>Jumlah Desa</h6>
-										<p>177</p>
-									</div>
-									<div class="col-md-6">
-
+										<p><?= $info['jumlah_desa'] ?></p>
 									</div>
 								</div>
 								<!--/row-->
 							</div>
-							<div class="tab-pane" id="messages">
+							<!-- <div class="tab-pane" id="messages">
 								<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 									<ol class="carousel-indicators">
 										<li data-target="#carouselExampleCaptions" data-slide-to="0" class="active">
@@ -112,7 +109,7 @@
 										<span class="sr-only">Next</span>
 									</a>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -125,3 +122,6 @@
 	</div>
 
 </div>
+
+</div>
+<!--End wrapper-->

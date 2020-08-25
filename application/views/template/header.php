@@ -30,8 +30,11 @@
 	<link href="<?= base_url() ?>assets/css/style.css" rel="stylesheet" />
 	<!-- Font Awesome -->
 	<link href="<?= base_url() ?>assets/css/fa/css/all.css" rel="stylesheet" />
-
+	<!-- JQuery -->
 	<script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
+	<!-- Data Tables -->
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/plugins/DataTables/datatables.min.css" />
+	<script type="text/javascript" src="<?= base_url() ?>assets/plugins/DataTables/datatables.min.js"></script>
 
 </head>
 

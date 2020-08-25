@@ -12,8 +12,19 @@ class Dashboard extends CI_Controller
         }
     }
 
+    function kab()
+    {
+        if ($this->session->userdata('role') == 2) {
+            return $this->db->get_where('tb_kab', ['id_kab' => $this->session->userdata('id_kab')])->row('nama');
+        } else {
+            $a = 'Dashboard Kab/Kota';
+            return $a;
+        }
+    }
+
     function _template($loc, $data)
     {
+        $data['kab'] = $this->kab();
         $this->load->view('template/header', $data);
         $this->load->view('template/admin/sidebar');
         $this->load->view($loc, $data);

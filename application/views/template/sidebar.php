@@ -4,18 +4,32 @@
 		<!--Start sidebar-wrapper-->
 		<div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
 			<div class="brand-logo">
-				<a href="index.html">
-					<img src="<?= base_url() ?>assets/images/asahan.gif" class="logo-icon" alt="logo icon">
-					<h5 class="logo-text">Kab. Asahan</h5>
+				<a href="<?= base_url('kab/') . $user['username'] ?>">
+					<img src="<?= base_url('assets/images/logo-kab/') . $info['logo'] ?>" class="logo-icon">
+					<h5 class="logo-text"><?= $kab['nama'] ?></h5>
 				</a>
 			</div>
 			<ul class="sidebar-menu do-nicescrol">
-				<li class="sidebar-header">MAIN NAVIGATION</li>
+				<li class="sidebar-header">MENU UTAMA</li>
 				<li>
-					<a href="index.html">
-						<i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
+					<a href="<?= base_url('kab/') . $user['username'] ?>">
+						<i class="zmdi zmdi-view-dashboard"></i> <span>Informasi Umum</span>
 					</a>
 				</li>
+				<li class="sidebar-header">MENU KAB/KOTA</li>
+				<?php
+				$id_kab = $kab['id_kab'];
+				$query = "SELECT * FROM `tb_menu` WHERE `id_kab` = $id_kab";
+				$menu = $this->db->query($query)->result_array();
+				foreach ($menu as $m) :
+				?>
+					<li>
+						<a href="<?= base_url('kab/' . $user['username'] . '/') . $m['link'] ?>">
+							<i class="<?= $m['icon'] ?>"></i> <span><?= $m['judul_menu'] ?></span>
+						</a>
+					</li>
+				<?php endforeach; ?>
+
 			</ul>
 		</div>
 		<!--End sidebar-wrapper-->

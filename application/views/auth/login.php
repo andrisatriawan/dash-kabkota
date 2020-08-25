@@ -48,6 +48,9 @@
     </div>
 </div>
 
+</div>
+<!--End wrapper-->
+
 <script>
     function cekpassword() {
         var password = document.getElementById('password').value;

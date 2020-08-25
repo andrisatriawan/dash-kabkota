@@ -3,36 +3,50 @@
 		<!--Start sidebar-wrapper-->
 		<div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
 			<div class="brand-logo">
-				<a href="index.html">
-					<h5 class="logo-text">DASHBOARD KAB/KOTA</h5>
+				<a href="<?= base_url('dashboard') ?>">
+					<h5 class="logo-text"><?= $kab ?></h5>
 				</a>
 			</div>
 			<ul class="sidebar-menu do-nicescrol">
-				<li class="sidebar-header">MENU</li>
 				<li>
-					<a href="index.html">
+					<a href="<?= base_url('dashboard') ?>">
 						<i class="zmdi zmdi-view-dashboard"></i> <span>Beranda</span>
 					</a>
 				</li>
+				<li class="sidebar-header">Menu Admin</li>
 				<?php
 				$id_role = $this->session->userdata('role');
 				$query = "SELECT * FROM `tb_menu`
-				JOIN `tb_akses_menu`
-				ON `tb_menu`.`id_menu` = `tb_akses_menu`.`id_menu`
-				WHERE `tb_akses_menu`.`id_role` = $id_role
-				";
-				$menu = $this->db->query($query)->result_array();
-
-				foreach ($menu as $m) :
+				JOIN `tb_akses_menu` ON `tb_menu`.`id_menu`=`tb_akses_menu`.`id_menu`
+				WHERE `tb_akses_menu`.`id_role` = $id_role";
+				$menu_adm = $this->db->query($query)->result_array();
+				foreach ($menu_adm as $m_adm) :
 				?>
 					<li>
-						<a href="<?= base_url($m['link']) ?>">
-							<i class="<?= $m['icon'] ?>"></i> <span><?= $m['judul_menu'] ?></span>
+						<a href="<?= base_url($m_adm['link']) ?>">
+							<i class="<?= $m_adm['icon'] ?>"></i> <span><?= $m_adm['judul_menu'] ?></span>
 						</a>
 					</li>
+
 				<?php
 				endforeach;
+				if ($id_role == 2) :
 				?>
+					<li class="sidebar-header">Menu Kab/Kota</li>
+					<?php
+					$id_kab = $this->session->userdata('id_kab');
+					$query = "SELECT * FROM `tb_menu` WHERE `id_kab` = $id_kab";
+					$menu = $this->db->query($query)->result_array();
+					$username = $this->session->userdata('username');
+					foreach ($menu as $m) :
+					?>
+						<li>
+							<a href="<?= base_url('kab/' . $username . '/' . $m['link']) ?>">
+								<i class="<?= $m['icon'] ?>"></i> <span><?= $m['judul_menu'] ?></span>
+							</a>
+						</li>
+				<?php endforeach;
+				endif; ?>
 				<li>
 					<a href="<?= base_url('auth/logout') ?>">
 						<i class="fas fa-sign-out-alt"></i> <span>Logout</span>

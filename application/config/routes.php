@@ -52,3 +52,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = 'notfound';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['menu/delete/(:num)'] = 'settings/hapusmenu/$1';
+$route['user/delete/(:num)'] = 'settings/hapususer/$1';
+$route['menu/update'] = 'settings/updatemenu';
+$route['user/update'] = 'settings/updateuser';
+$route['akses/save'] = 'settings/simpanakses';
+$route['akses/delete/(:num)'] = 'settings/hapusakses/$1';
+
+
+$route['kab/(:any)'] = 'home/kab/$1';
+$route['kab/(:any)/(:any)'] = 'home/page/$1/$2';
