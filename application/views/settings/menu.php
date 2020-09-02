@@ -79,17 +79,23 @@
                                             <small class="text-danger pl-3" id="pesan-judul" style="display: inline;">Tidak boleh kosong</small>
                                         </div>
                                         <div class="form-group">
-                                            <label for="link">Url Menu</label>
-                                            <div class="input-group">
+                                            <label for="jenis-url" class="input-group">Url Menu</label>
+                                            <select name="jenis_url" id="jenis-url" class="form-control">
+                                                <option value="">Pilih</option>
+                                                <option value="0">Buat URL</option>
+                                                <option value="1">URL yang sudah ada</option>
+                                            </select>
+
+                                        </div>
+                                        <div id="url" class="form-group">
+                                            <!-- <div class="input-group">
                                                 <?php
                                                 if ($this->session->userdata('role') == 1) :
                                                 ?>
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon3"><?= base_url() ?></span>
                                                     </div>
-                                                <?php else :
-
-                                                ?>
+                                                <?php else : ?>
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon3"><?= base_url('kab/' . $username . '/') ?></span>
                                                     </div>
@@ -97,13 +103,13 @@
                                                 <input type="text" class="form-control" id="link" placeholder="URL Menu" name="link" aria-describedby="basic-addon3" oninput="cekinput(this.value, 'pesan-link')" value="<?= set_value('link') ?>">
                                             </div>
                                             <small class="text-danger pl-3" id="pesan-link1" style="display: none;">Link sudah ada!</small>
-                                            <small class="text-danger pl-3" id="pesan-link" style="display: inline;">Tidak boleh kosong</small>
+                                            <small class="text-danger pl-3" id="pesan-link" style="display: inline;">Tidak boleh kosong</small> -->
                                         </div>
+
                                         <div class="form-group">
                                             <label for="icon">Icon Menu</label>
                                             <small><a href="https://fontawesome.com/icons?d=gallery" class="text-primary" target="blank"><i class="fas fa-eye"></i></a></small>
-                                            <input type="text" class="form-control" id="icon" placeholder="Icon Menu" name="icon" oninput="cekinput(this.value, 'pesan-icon')" value="<?= set_value('icon') ?>">
-                                            <small class="text-danger pl-3" id="pesan-icon" style="display: inline;">Tidak boleh kosong</small>
+                                            <input type="text" class="form-control" id="icon" placeholder="Icon Menu" name="icon" value="<?= set_value('icon') ?>">
                                         </div>
                                         <button type="button" id="simpan-menu" class="btn btn-light btn-block waves-effect waves-light">Simpan</button>
                                     </form>
@@ -232,7 +238,7 @@
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content" style="background-color: rgba(0,0,0, 1);">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tambahAksesLabel">Modal title</h5>
+                    <h5 class="modal-title" id="tambahAksesLabel">Tambah Hak Akses Menu</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #fff;">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -298,6 +304,68 @@
 <script type="text/javascript">
     $(document).ready(function() {
         var url1 = '<?= base_url() ?>';
+        $('#jenis-url').change(function() {
+            var nilai = $('#jenis-url').val();
+            if (nilai == 0) {
+                var a = `
+                <div class="input-group">
+        <?php
+        if ($this->session->userdata('role') == 1) :
+        ?>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon3"><?= base_url() ?></span>
+                        </div>
+        <?php else : ?>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon3"><?= base_url('kab/' . $username . '/') ?></span>
+                        </div>
+        <?php endif; ?>
+                    <input type="text" class="form-control" id="link" placeholder="URL Menu" name="link" aria-describedby="basic-addon3" oninput="cekinput(this.value, 'pesan-link')" value="<?= set_value('link') ?>">
+                </div>
+                <small class="text-danger pl-3" id="pesan-link1" style="display: none;">Link sudah ada!</small>
+                <small class="text-danger pl-3" id="pesan-link" style="display: inline;">Tidak boleh kosong</small>
+                `;
+                document.getElementById('url').innerHTML = a;
+            } else if (nilai == 1) {
+                $('#url').html(`
+                <input type="text" class="form-control" id="link" placeholder="URL Menu" name="link" aria-describedby="basic-addon3" oninput="cekinput(this.value, 'pesan-link')" value="<?= set_value('link') ?>">
+                <small class="text-danger pl-3" id="pesan-link1" style="display: none;">Link sudah ada!</small>
+                <small class="text-danger pl-3" id="pesan-link" style="display: inline;">Tidak boleh kosong</small>
+                `);
+            } else {
+                console.log('Hello World');
+            }
+        });
+        $(function cekUrl() {
+            var data = $('#form-menu').serialize();
+            var coba = $.ajax({
+                type: 'POST',
+                url: url1 + 'settings/cekUrl',
+                data: data,
+                success: function(cek) {
+                    if (cek == 1) {
+                        document.getElementById('pesan-link1').style.display = 'inline';
+                    } else {
+                        document.getElementById('pesan-link1').style.display = 'none';
+                    }
+                }
+            });
+        });
+        $('#link').on('input', function() {
+            var data = $('#form-menu').serialize();
+            var coba = $.ajax({
+                type: 'POST',
+                url: url1 + 'settings/cekUrl',
+                data: data,
+                success: function(cek) {
+                    if (cek == 1) {
+                        document.getElementById('pesan-link1').style.display = 'inline';
+                    } else {
+                        document.getElementById('pesan-link1').style.display = 'none';
+                    }
+                }
+            });
+        });
         $('#editMenu').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id_menu = button.data('id')
@@ -305,7 +373,7 @@
             var link = button.data('link')
             var icon = button.data('icon')
             var modal = $(this)
-            modal.find('.modal-title').text('Ubah menu ' + judul + id_menu)
+            modal.find('.modal-title').text('Ubah menu ' + judul)
             modal.find('#edit-id').val(id_menu)
             modal.find('#edit-judul').val(judul)
             modal.find('#edit-link').val(link)
@@ -338,21 +406,6 @@
                 data: data,
                 success: function() {
                     $(location).attr('href', url1 + 'settings/menu');
-                }
-            });
-        });
-        $("#link").on('input', function() {
-            var data = $('#form-menu').serialize();
-            var coba = $.ajax({
-                type: 'POST',
-                url: url1 + 'settings/cekUrl',
-                data: data,
-                success: function(cek) {
-                    if (cek == 1) {
-                        document.getElementById('pesan-link1').style.display = 'inline';
-                    } else {
-                        document.getElementById('pesan-link1').style.display = 'none';
-                    }
                 }
             });
         });

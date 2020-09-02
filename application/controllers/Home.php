@@ -24,10 +24,7 @@ class Home extends CI_Controller
 
     public function kab($id = '')
     {
-        // echo $id;
         $kab = $this->M_home->getKab($id);
-
-        // echo $kab->num_rows();
 
         if ($kab->num_rows() == 1) {
             $data['header'] = $this->db->get_where('tb_kab', ['id_kab' => $kab->row('id_kab')])->row('nama');
@@ -38,14 +35,15 @@ class Home extends CI_Controller
             $this->_template('index', $data);
         } else {
             $this->load->view('404');
-            // $this->load->view('template/footer');
         }
     }
 
-    public function page($id_kab, $laman)
+    public function page($id_kab, $url)
     {
         $kab = $this->M_home->getKab($id_kab);
-        $laman = $this->db->get_where('tb_menu', ['link' => $laman]);
+        $this->db->where('id_kab', $kab->row('id_kab'));
+        $this->db->where('link', $url);
+        $laman = $this->db->get('tb_menu');
 
         if ($laman->num_rows() == 1) {
             $data['header'] = $this->db->get_where('tb_kab', ['id_kab' => $kab->row('id_kab')])->row('nama');
@@ -55,10 +53,7 @@ class Home extends CI_Controller
 
             $this->_template('pages', $data);
         } else {
-            echo 'laman tidak ditemukan';
+            $this->load->view('404');
         }
-
-
-        // echo 'ini halaman kabupaten ' . $id_kab . ' dan dipanggil halaman ' . $laman;
     }
 }

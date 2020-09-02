@@ -17,10 +17,16 @@
 						<h5 class="card-title"><?= $kab['nama']; ?></h5>
 						<p class="card-text"><?= $info['alamat_kantor'] ?></p>
 						<div class="icon-block">
-							<a href="javascript:void();"><i class="fab fa-facebook-square bg-facebook text-white"></i></a>
-							<a href="javascript:void();"> <i class="fab fa-twitter bg-twitter text-white"></i></a>
-							<a href="javascript:void();"><i class="fab fa-instagram bg-instagram text-white"></i></a>
-							<a href="javascript:void();"> <i class="fas fa-envelope bg-envelope text-white"></i></a>
+							<?php
+							$this->db->select('*');
+							$this->db->from('tb_sosmed_kab');
+							$this->db->join('tb_sosmed', 'tb_sosmed.id_sosmed=tb_sosmed_kab.id_sosmed');
+							$this->db->where('id_kab', $kab['id_kab']);
+							$sosmed = $this->db->get()->result_array();
+							foreach ($sosmed as	$ss) :
+							?>
+								<a href="<?= $ss['link'] ?>" target="blank"><i class="<?= $ss['icon'] ?> text-white" style="margin: 0;"></i></a>
+							<?php endforeach; ?>
 						</div>
 					</div>
 				</div>

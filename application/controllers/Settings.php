@@ -131,23 +131,27 @@ class Settings extends CI_Controller
     {
         $this->form_validation->set_rules('judul_menu', 'Judul Menu', 'trim|required');
         $this->form_validation->set_rules('link', 'Link', 'trim|required');
-        $this->form_validation->set_rules('icon', 'Icon', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger p-2" role="alert">Gagal disimpan!</div>');
             $this->menu();
         } else {
+            if ($this->input->post('icon') == '') {
+                $icon = 'fas fa-stream';
+            } else {
+                $icon = $this->input->post('icon');
+            }
             $data = [
                 'id_kab' => $this->session->userdata('id_kab'),
                 'judul_menu' => $this->input->post('judul_menu'),
                 'link' => $this->input->post('link'),
-                'icon' => $this->input->post('icon')
+                'icon' => $icon
             ];
             $this->db->insert('tb_menu', $data);
             $this->session->set_flashdata('pesan', '<div class="alert alert-success p-2" role="alert">Berhasil disimpan!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button></div>');
+            <span aria-hidden="true">&times;</span>
+            </button></div>');
         }
     }
 
@@ -178,8 +182,8 @@ class Settings extends CI_Controller
     public function updatemenu()
     {
         $id_menu = $this->input->post('edit_id');
-        $cek = $this->db->get_where('tb_menu', $id_menu)->num_rows();
-        if ($cek != 1) {
+        $cek = $this->db->get_where('tb_menu', ['id_menu' => $id_menu])->num_rows();
+        if ($cek == 0) {
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show p-2" role="alert">
             Gagal diubah, data tidak ditemukan!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -255,6 +259,162 @@ class Settings extends CI_Controller
             </button>
           </div>');
             redirect(base_url('settings/menu'));
+        }
+    }
+
+    public function sosmed()
+    {
+        if ($this->session->userdata('role') == 1) {
+            $data['header'] = 'Sosial Media';
+            $data['sosmed'] = $this->db->get('tb_sosmed');
+            $this->_template('settings/sosmed', $data);
+        } else {
+            $data['header'] = 'Sosial Media';
+            $data['sosmed'] = $this->db->get_where('tb_sosmed_kab', ['id_kab' => $this->session->userdata('id_kab')]);
+            $this->_template('settings/sosmed_kab', $data);
+        }
+    }
+
+    public function simpansosmed()
+    {
+        if ($this->session->userdata('role') == 1) {
+            $this->form_validation->set_rules('sosmed', 'sosmed', 'required|trim');
+            $this->form_validation->set_rules('icon', 'icon', 'required|trim');
+
+            if ($this->form_validation->run() == false) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger p-2" role="alert">Gagal disimpan!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button></div>');
+                $this->sosmed();
+            } else {
+                $data = [
+                    'sosmed' => $this->input->post('sosmed'),
+                    'icon' => $this->input->post('icon')
+                ];
+                $this->db->insert('tb_sosmed', $data);
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success p-2" role="alert">Berhasil disimpan!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button></div>');
+            }
+        } else {
+            $this->form_validation->set_rules('sosmed', 'sosmed', 'required|trim');
+            $this->form_validation->set_rules('link', 'link', 'required|trim');
+
+            if ($this->form_validation->run() == false) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger p-2" role="alert">Gagal disimpan!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button></div>');
+                $this->sosmed();
+            } else {
+                $data = [
+                    'id_kab' => $this->session->userdata('id_kab'),
+                    'id_sosmed' => $this->input->post('sosmed'),
+                    'link' => $this->input->post('link')
+                ];
+                $this->db->insert('tb_sosmed_kab', $data);
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success p-2" role="alert">Berhasil disimpan!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button></div>');
+            }
+        }
+    }
+
+    public function updatesosmed()
+    {
+        if ($this->session->userdata('role') == 1) {
+            $id_sosmed = $this->input->post('a_id');
+            $cek = $this->db->get_where('tb_sosmed', ['id_sosmed' => $id_sosmed])->num_rows();
+            if ($cek != 1) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show p-2" role="alert">
+                Gagal diubah, data tidak ditemukan!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>');
+            } else {
+                $data = [
+                    'sosmed' => $this->input->post('a_sosmed'),
+                    'icon' => $this->input->post('a_icon')
+                ];
+                $this->db->where('id_sosmed', $id_sosmed);
+                $this->db->update('tb_sosmed', $data);
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success p-2" role="alert">Berhasil diubah!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button></div>');
+            }
+        } else {
+            $id = $this->input->post('a_id');
+            $cek = $this->db->get_where('tb_sosmed_kab', ['id' => $id])->num_rows();
+            if ($cek != 1) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show p-2" role="alert">
+                Gagal diubah, data tidak ditemukan!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>');
+            } else {
+                $data = [
+                    'link' => $this->input->post('a_link')
+                ];
+                $this->db->where('id', $id);
+                $this->db->update('tb_sosmed_kab', $data);
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success p-2" role="alert">Berhasil diubah!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button></div>');
+            }
+        }
+    }
+
+    public function hapussosmed($id)
+    {
+        if ($this->session->userdata('role') == 1) {
+            $cek = $this->db->get_where('tb_sosmed', ['id_sosmed' => $id])->num_rows();
+            if ($cek != 1) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show p-2" role="alert">
+                Gagal dihapus, data tidak ditemukan!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>');
+                redirect(base_url('settings/sosmed'));
+            } else {
+                $this->db->where('id_sosmed', $id);
+                $this->db->delete('tb_sosmed');
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show p-2" role="alert">
+                Data dihapus!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>');
+                redirect(base_url('settings/sosmed'));
+            }
+        } else {
+            $cek = $this->db->get_where('tb_sosmed_kab', ['id' => $id])->num_rows();
+            if ($cek != 1) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show p-2" role="alert">
+                Gagal dihapus, data tidak ditemukan!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>');
+                redirect(base_url('settings/sosmed'));
+            } else {
+                $this->db->where('id', $id);
+                $this->db->delete('tb_sosmed_kab');
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show p-2" role="alert">
+                Data dihapus!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>');
+                redirect(base_url('settings/sosmed'));
+            }
         }
     }
 }

@@ -38,24 +38,24 @@ function cekKab(id) {
 	ajaxku.send(null);
 }
 
-function cekUrl(id) {
-	var url = `${base_url}settings/cekUrl/${id}`;
-	ajaxku.onreadystatechange = function () {
-		if (ajaxku.readyState == 4) {
-			if (ajaxku.responseText.length >= 0) {
-				if (ajaxku.responseText == 1) {
-					document.getElementById('pesan-link1').style.display = 'inline';
-					console.log('tidak aman');
-				} else {
-					document.getElementById('pesan-link1').style.display = 'none';
-					console.log('aman');
-				}
-			}
-		}
-	}
-	ajaxku.open("GET", url, true);
-	ajaxku.send(null);
-}
+// function cekUrl(id) {
+// 	var url = `${base_url}settings/cekUrl/${id}`;
+// 	ajaxku.onreadystatechange = function () {
+// 		if (ajaxku.readyState == 4) {
+// 			if (ajaxku.responseText.length >= 0) {
+// 				if (ajaxku.responseText == 1) {
+// 					document.getElementById('pesan-link1').style.display = 'inline';
+// 					console.log('tidak aman');
+// 				} else {
+// 					document.getElementById('pesan-link1').style.display = 'none';
+// 					console.log('aman');
+// 				}
+// 			}
+// 		}
+// 	}
+// 	ajaxku.open("GET", url, true);
+// 	ajaxku.send(null);
+// }
 
 function ajax() {
 	if (window.XMLHttpRequest) {

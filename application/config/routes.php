@@ -49,16 +49,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'home';
+$route['default_controller'] = 'dashboard';
 $route['404_override'] = 'notfound';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['menu/delete/(:num)'] = 'settings/hapusmenu/$1';
-$route['user/delete/(:num)'] = 'settings/hapususer/$1';
 $route['menu/update'] = 'settings/updatemenu';
+
+$route['user/delete/(:num)'] = 'settings/hapususer/$1';
 $route['user/update'] = 'settings/updateuser';
+
 $route['akses/save'] = 'settings/simpanakses';
 $route['akses/delete/(:num)'] = 'settings/hapusakses/$1';
+
+$route['sosmed/delete/(:num)'] = 'settings/hapussosmed/$1';
 
 
 $route['kab/(:any)'] = 'home/kab/$1';
