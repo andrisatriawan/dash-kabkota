@@ -20,6 +20,7 @@ class Informasi extends CI_Controller
 
     function _template($loc, $data)
     {
+        $data['logo'] = $this->db->get_where('tb_informasi', ['id_kab' => $this->session->userdata('id_kab')])->row('logo');
         $this->load->view('template/header', $data);
         $this->load->view('template/admin/sidebar');
         $this->load->view($loc, $data);

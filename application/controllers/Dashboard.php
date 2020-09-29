@@ -34,6 +34,7 @@ class Dashboard extends CI_Controller
     public function index()
     {
         $data['header'] = 'Dashboard admin';
+        $data['logo'] = $this->db->get_where('tb_informasi', ['id_kab' => $this->session->userdata('id_kab')])->row('logo');
         $this->_template('dashboard/index', $data);
     }
 }

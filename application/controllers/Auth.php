@@ -17,6 +17,8 @@ class Auth extends CI_Controller
 
     public function login()
     {
+        $data['logo'] = 'logo-provsu.png';
+
         $cek_login = $this->db->get_where('tb_users', ['username' => $this->session->userdata('username')])->num_rows();
         if ($cek_login != 0) {
             redirect(base_url('dashboard'));

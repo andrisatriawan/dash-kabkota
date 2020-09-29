@@ -7,7 +7,7 @@
                         <?= $this->session->flashdata('pesan'); ?>
                         <p id="pesan"></p>
                         <div class="card-content px-3">
-                            <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified bg-light">
+                            <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
                                 <li class="nav-item">
                                     <a href="javascript:void();" data-target="#sosmed" data-toggle="pill" class="nav-link active" id="link-sosmed">
                                         <i class="fas fa-user-friends"></i> <span class="hidden-xs">Sosial Media</span>

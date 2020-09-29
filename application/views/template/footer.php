@@ -14,9 +14,12 @@
 <script src="<?= base_url() ?>assets/js/script.js"></script>
 
 <script type="text/javascript">
-	$('.carousel').carousel({
-		interval: 5000
+	$(document).load(function() {
+		// $('.carousel').carousel({
+		// 	interval: 5000
+		// });
 	});
+	document.getElementsByClassName('simplebar-content')
 </script>
 
 </body>

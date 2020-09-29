@@ -4,17 +4,25 @@
 	<div class="container-fluid">
 
 		<div class="row mt-3">
-			<div class="col-lg-4">
+			<div class="col-lg-5">
 				<div class="card profile-card-2">
 					<div class="card-img-block">
 						<img class="img-fluid" src="<?= base_url('assets/images/gedung/') . $info['foto_kantor'] ?>">
 					</div>
-					<div class="card-body pt-6">
+					<div class="card-body">
 						<!-- <img src="" alt="profile-image" class="profile"> -->
-						<div class="img-card">
+						<!-- <div class="img-card">
 							<img src="<?= base_url('assets/images/logo-kab/') . $info['logo'] ?>" class="img-fluid img-thumbnail">
-						</div>
-						<h5 class="card-title"><?= $kab['nama']; ?></h5>
+						</div> -->
+						<?php
+						if (substr($kab['nama'], 0, 4) == 'KAB.') {
+							$sebutan = 'KABUPATEN ';
+						} else {
+							$sebutan = 'KOTA ';
+						}
+						?>
+						<h5 class="card-title"><?= $sebutan . substr($kab['nama'], 5); ?></h5>
+						<?= $info['url_peta'] ?>
 						<p class="card-text"><?= $info['alamat_kantor'] ?></p>
 						<div class="icon-block">
 							<?php
@@ -32,7 +40,7 @@
 				</div>
 			</div>
 
-			<div class="col-lg-8">
+			<div class="col-lg-7">
 				<div class="card">
 					<div class="card-body">
 						<ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
@@ -131,3 +139,9 @@
 
 </div>
 <!--End wrapper-->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('iframe').addClass('semat-url');
+	});
+</script>

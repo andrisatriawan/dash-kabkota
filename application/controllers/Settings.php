@@ -26,6 +26,7 @@ class Settings extends CI_Controller
     function _template($loc, $data)
     {
         $data['kab'] = $this->kab();
+        $data['logo'] = $this->db->get_where('tb_informasi', ['id_kab' => $this->session->userdata('id_kab')])->row('logo');
         $this->load->view('template/header', $data);
         $this->load->view('template/admin/sidebar', $data);
         $this->load->view($loc, $data);
@@ -53,7 +54,6 @@ class Settings extends CI_Controller
                 'id_kab' => $this->input->post('kabupaten', true),
                 'username' => htmlspecialchars($this->input->post('username', true)),
                 'password' => password_hash($this->input->post('password', true), PASSWORD_DEFAULT)
-
             ];
             $this->db->insert('tb_users', $user);
             $this->session->set_flashdata('pesan', '<div class="alert alert-success p-2" role="alert">Berhasil disimpan!</div>');
@@ -105,6 +105,12 @@ class Settings extends CI_Controller
         redirect(base_url('settings/users'));
     }
 
+    public function ubah_password()
+    {
+        $data['header'] = 'Ubah Password';
+        $this->_template('settings/ubahpassword', $data);
+    }
+
     // Manajemen Menu
 
     public function menu()
@@ -115,6 +121,7 @@ class Settings extends CI_Controller
         $data['menu'] = $this->db->get_where('tb_menu', ['id_kab' => $id_kab])->result_array();
         $data['role'] = $this->db->get('tb_role')->result_array();
         $data['akses_menu'] = $this->_aksesmenu();
+        $data['mutama'] = $this->tampil_menu_utama();
         $this->_template('settings/menu', $data);
     }
 
@@ -130,7 +137,11 @@ class Settings extends CI_Controller
     public function simpanmenu()
     {
         $this->form_validation->set_rules('judul_menu', 'Judul Menu', 'trim|required');
-        $this->form_validation->set_rules('link', 'Link', 'trim|required');
+        if ($this->input->post('jenis_url') == 0) {
+            $this->form_validation->set_rules('link', 'Link', 'trim|required');
+        } else {
+            $this->form_validation->set_rules('link', 'Link', 'trim|required');
+        }
 
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger p-2" role="alert">Gagal disimpan!</div>');
@@ -141,10 +152,34 @@ class Settings extends CI_Controller
             } else {
                 $icon = $this->input->post('icon');
             }
+
+            if ($this->input->post('tab_baru') == '') {
+                $tab_baru = 'N';
+            } else {
+                $tab_baru = $this->input->post('tab_baru');
+            }
+
+            if ($this->session->userdata('role') == 2) {
+                if ($this->input->post('menu_utama') == 'add') {
+                    $data = [
+                        'id_kab' => $this->session->userdata('id_kab'),
+                        'judul_menu_utama' => $this->input->post('judul_menu_utama')
+                    ];
+                    $this->db->insert('tb_menu_utama', $data);
+                    $id_menu_utama = $this->_menu_utama($this->input->post('judul_menu_utama'));
+                } else {
+                    $id_menu_utama = $this->input->post('menu_utama');
+                }
+            } else {
+                $id_menu_utama = 0;
+            }
             $data = [
                 'id_kab' => $this->session->userdata('id_kab'),
+                'id_menu_utama' => $id_menu_utama,
                 'judul_menu' => $this->input->post('judul_menu'),
+                'jenis_url' => $this->input->post('jenis_url'),
                 'link' => $this->input->post('link'),
+                'tab_baru' => $tab_baru,
                 'icon' => $icon
             ];
             $this->db->insert('tb_menu', $data);
@@ -153,6 +188,14 @@ class Settings extends CI_Controller
             <span aria-hidden="true">&times;</span>
             </button></div>');
         }
+    }
+
+    function _menu_utama($judul)
+    {
+        $this->db->where('id_kab', $this->session->userdata('id_kab'));
+        $this->db->where('judul_menu_utama', $judul);
+        $this->db->order_by('id_menu_utama', 'DESC');
+        return $this->db->get('tb_menu_utama')->row('id_menu_utama');
     }
 
     public function hapusmenu($id)
@@ -172,7 +215,7 @@ class Settings extends CI_Controller
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show p-2" role="alert">
             Data dihapus!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times;</span>
             </button>
             </div>');
             redirect(base_url('settings/menu'));
@@ -187,14 +230,43 @@ class Settings extends CI_Controller
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show p-2" role="alert">
             Gagal diubah, data tidak ditemukan!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times;</span>
             </button>
             </div>');
         } else {
+            if ($this->input->post('edit_icon') == '') {
+                $icon = 'fas fa-stream';
+            } else {
+                $icon = $this->input->post('edit_icon');
+            }
+
+            if ($this->input->post('tab_baru_edit') != 'Y') {
+                $tab_baru = 'N';
+            } else {
+                $tab_baru = $this->input->post('tab_baru_edit');
+            }
+
+            if ($this->session->userdata('role') == 2) {
+                if ($this->input->post('menu_utama_edit') == 'add') {
+                    $data = [
+                        'id_kab' => $this->session->userdata('id_kab'),
+                        'judul_menu_utama' => $this->input->post('judul_menu_utama_edit')
+                    ];
+                    $this->db->insert('tb_menu_utama', $data);
+                    $id_menu_utama = $this->_menu_utama($this->input->post('judul_menu_utama_edit'));
+                } else {
+                    $id_menu_utama = $this->input->post('menu_utama_edit');
+                }
+            } else {
+                $id_menu_utama = 0;
+            }
+
             $data = [
+                'id_menu_utama' => $id_menu_utama,
                 'judul_menu' => $this->input->post('edit_judul_menu'),
                 'link' => $this->input->post('edit_link'),
-                'icon' => $this->input->post('edit_icon')
+                'tab_baru' => $tab_baru,
+                'icon' => $icon
             ];
             $this->db->where('id_menu', $id_menu);
             $this->db->update('tb_menu', $data);
@@ -416,5 +488,47 @@ class Settings extends CI_Controller
                 redirect(base_url('settings/sosmed'));
             }
         }
+    }
+
+    // Menu Utama
+    public function tampil_menu_utama()
+    {
+        $mutama = $this->db->get_where('tb_menu_utama', ['id_kab' => $this->session->userdata('id_kab')])->result_array();
+        return $mutama;
+    }
+    public function menu_utama()
+    {
+        $data['header'] = 'Menu Utama';
+        $this->_template('settings/menu_utama', $data);
+    }
+
+    public function simpanmenuutama()
+    {
+        $data = [
+            'id_kab' => $this->session->userdata('id_kab'),
+            'judul_menu_utama' => $this->input->post('judul_menu_utama_baru')
+        ];
+        $simpan = $this->db->insert('tb_menu_utama', $data);
+        echo json_encode($simpan);
+    }
+
+    public function updatemenuutama($id)
+    {
+        $data = [
+            'judul_menu_utama' => $this->input->post('judul_menu_utama_edit')
+        ];
+        $this->db->where('id_menu_utama', $id);
+        $update = $this->db->update('tb_menu_utama', $data);
+        echo json_encode($update);
+    }
+
+    public function hapusmenuutama($id)
+    {
+        $this->db->delete('tb_menu_utama', ['id_menu_utama' => $id]);
+    }
+    public function allmenu_utama()
+    {
+        $mutama = $this->db->get_where('tb_menu_utama', ['id_kab' => $this->session->userdata('id_kab')])->result();
+        echo json_encode($mutama);
     }
 }

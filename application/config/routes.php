@@ -64,6 +64,12 @@ $route['akses/delete/(:num)'] = 'settings/hapusakses/$1';
 
 $route['sosmed/delete/(:num)'] = 'settings/hapussosmed/$1';
 
+$route['menuutama/save']  = 'settings/simpanmenuutama';
+$route['menuutama/edit/(:num)']  = 'settings/updatemenuutama/$1';
+$route['menuutama/hapus/(:num)']  = 'settings/hapusmenuutama/$1';
 
 $route['kab/(:any)'] = 'home/kab/$1';
 $route['kab/(:any)/(:any)'] = 'home/page/$1/$2';
+$route['kab/(:any)/page?url=(:any)'] = 'home/page_embed/$1/$2';
+
+$route['page/(:any)'] = 'page/index/$1';

@@ -31,6 +31,12 @@
                                     <input type="text" class="form-control" id="alamat" placeholder="Alamat Kantor" name="alamat_kantor" oninput="cekinput(this.value, 'pesan-alamat')" value="<?= set_value('alamat_kantor') ?>">
                                     <?= form_error('alamat_kantor', '<small class="text-danger pl-3">', '</small>') ?>
                                 </div>
+                                <div class="form-group">
+                                    <label for="peta">URL Sematkan Peta</label>
+                                    <textarea name="url_peta" id="peta" class="form-control" rows="5"><?= set_value('url_peta') ?></textarea>
+                                    <!-- <input type="text" class="form-control" id="peta" placeholder="URL Sematkan Peta" name="url_peta" value=""> -->
+                                    <?= form_error('url_peta', '<small class="text-danger pl-3">', '</small>') ?>
+                                </div>
                                 <div class="form-row">
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -109,6 +115,12 @@
                                     <label for="alamat">Alamat Kantor</label>
                                     <input type="text" class="form-control" id="alamat" placeholder="Alamat Kantor" name="alamat_kantor" value="<?= $data['alamat_kantor'] ?>">
                                     <?= form_error('alamat_kantor', '<small class="text-danger pl-3">', '</small>') ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="peta">URL Sematkan Peta</label>
+                                    <textarea name="url_peta" id="peta" class="form-control" rows="5"><?= $data['url_peta'] ?></textarea>
+                                    <!-- <input type="text" class="form-control" id="peta" placeholder="URL Sematkan Peta" name="url_peta" value=""> -->
+                                    <?= form_error('url_peta', '<small class="text-danger pl-3">', '</small>') ?>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-3">
