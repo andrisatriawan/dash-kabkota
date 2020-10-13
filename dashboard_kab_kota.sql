@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2020 at 05:38 AM
+-- Generation Time: Oct 13, 2020 at 04:58 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -40,12 +40,12 @@ CREATE TABLE `tb_akses_menu` (
 
 INSERT INTO `tb_akses_menu` (`id_akses`, `id_menu`, `id_role`) VALUES
 (1, 1, 1),
-(3, 1, 2),
 (4, 13, 2),
 (5, 17, 1),
 (9, 22, 1),
 (10, 22, 2),
-(11, 33, 2);
+(12, 2, 2),
+(13, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -140,6 +140,25 @@ CREATE TABLE `tb_kecamatan` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_laman`
+--
+
+CREATE TABLE `tb_laman` (
+  `id` int(11) NOT NULL,
+  `id_menu` int(11) NOT NULL,
+  `isi` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_laman`
+--
+
+INSERT INTO `tb_laman` (`id`, `id_menu`, `isi`) VALUES
+(1, 19, '<h1 style=\"text-align: center;\"><strong>Data Penduduk</strong></h1>\n<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\n<tbody>\n<tr>\n<td style=\"width: 8.17037%; text-align: center;\"><strong>No</strong></td>\n<td style=\"width: 54.8624%; text-align: center;\"><strong>Nama</strong></td>\n<td style=\"width: 31.58%; text-align: center;\"><strong>Alamat</strong></td>\n</tr>\n<tr>\n<td style=\"width: 8.17037%; text-align: center;\">1</td>\n<td style=\"width: 54.8624%;\">Andri Satriawan</td>\n<td style=\"width: 31.58%;\">Jl. Platina IV</td>\n</tr>\n</tbody>\n</table>');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_menu`
 --
 
@@ -173,7 +192,8 @@ INSERT INTO `tb_menu` (`id_menu`, `id_kab`, `id_menu_utama`, `judul_menu`, `jeni
 (33, 0, 0, 'Menu Utama', 0, 'settings/menu_utama', 'N', 'fas fa-folder'),
 (35, 1209, 2, 'Submenu 1', 0, 'submenu-1', 'N', 'fas fa-stream'),
 (36, 1209, 2, 'Submenu 2', 0, 'submenu-2', 'N', 'fas fa-stream'),
-(37, 1201, 5, 'Submenu 1', 0, 'submenu-1', 'N', 'fas fa-stream');
+(37, 1201, 0, 'Submenu 1', 0, 'submenu-1', 'N', 'fas fa-stream'),
+(38, 0, 0, 'Menu 1', 0, 'menu-1-1', 'N', '');
 
 -- --------------------------------------------------------
 
@@ -193,9 +213,10 @@ CREATE TABLE `tb_menu_utama` (
 
 INSERT INTO `tb_menu_utama` (`id_menu_utama`, `id_kab`, `judul_menu_utama`) VALUES
 (2, 1209, 'Coba'),
-(3, 1209, 'Tes'),
 (4, 0, 'Tanpa Menu Utama'),
-(5, 1201, 'Menu 1');
+(5, 1201, 'Menu 1'),
+(12, 1209, 'Test1'),
+(25, 1209, 'Menu Utama 3');
 
 -- --------------------------------------------------------
 
@@ -338,6 +359,12 @@ ALTER TABLE `tb_kecamatan`
   ADD PRIMARY KEY (`id_kec`);
 
 --
+-- Indexes for table `tb_laman`
+--
+ALTER TABLE `tb_laman`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_menu`
 --
 ALTER TABLE `tb_menu`
@@ -393,7 +420,7 @@ ALTER TABLE `tb_wisata`
 -- AUTO_INCREMENT for table `tb_akses_menu`
 --
 ALTER TABLE `tb_akses_menu`
-  MODIFY `id_akses` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_akses` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tb_informasi`
@@ -408,16 +435,22 @@ ALTER TABLE `tb_kab`
   MODIFY `id_kab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1279;
 
 --
+-- AUTO_INCREMENT for table `tb_laman`
+--
+ALTER TABLE `tb_laman`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tb_menu`
 --
 ALTER TABLE `tb_menu`
-  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tb_menu_utama`
 --
 ALTER TABLE `tb_menu_utama`
-  MODIFY `id_menu_utama` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_menu_utama` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tb_opd`

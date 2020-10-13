@@ -10,8 +10,8 @@
 	<title><?= $header; ?></title>
 
 	<!-- loader-->
-	<link href="<?= base_url() ?>assets/css/pace.min.css" rel="stylesheet" />
-	<script src="<?= base_url() ?>assets/js/pace.min.js"></script>
+	<!-- <link href="<?= base_url() ?>assets/css/pace.min.css" rel="stylesheet" />
+	<script src="<?= base_url() ?>assets/js/pace.min.js"></script> -->
 	<!--favicon-->
 	<link rel="icon" href="<?= base_url('assets/images/logo-kab/') . $logo ?>" type="image/x-icon">
 
@@ -68,9 +68,9 @@
 							'<td class="text-center">' + j + '</td>' +
 							'<td><input type="text" class="form-control" id="judul-menu-utama-edit-' + data[i].id_menu_utama + '" name="judul_menu_utama_edit" placeholder="Judul Menu Utama" value="' + data[i].judul_menu_utama + '"></td>' +
 							'<td class="text-center">' +
-							'<button type="button" class="btn btn-primary" onclick="simpanMenuUtama(' + data[i].id_menu_utama + ')">' +
+							'<button type="button" class="btn btn-primary" onclick="simpanMenuUtama(' + data[i].id_menu_utama + ')" data-toggle="tooltip" data-placement="bottom" title="Ubah Menu Utama">' +
 							'<i class="fas fa-save"></i></button>' +
-							'<button type="button" class="btn ml-2 btn-danger" onclick="hapusMenuUtama(' + data[i].id_menu_utama + ')">' +
+							'<button type="button" class="btn ml-2 btn-danger" onclick="hapusMenuUtama(' + data[i].id_menu_utama + ')" data-toggle="tooltip" data-placement="bottom" title="Hapus Menu Utama">' +
 							'<i class="fas fa-trash"></i></button>' +
 							'</td>' +
 							'</tr>';
@@ -98,6 +98,23 @@
 			});
 		}
 
+		function list_menu_utama() {
+			$.ajax({
+				type: 'GET',
+				url: BASE_URL + 'settings/allmenu_utama',
+				async: true,
+				dataType: 'json',
+				success: function(data) {
+					var html = '<option value="">Tanpa Menu Utama</option>';
+					for (var i = 0; i < data.length; i++) {
+						html += '<option value="' + data[i].id_menu_utama + '">' + data[i].judul_menu_utama + '</option>';
+					}
+					html += '<option value="add">Buat Menu Utama</option>';
+					$('#menu-utama').html(html);
+				}
+			});
+		}
+
 		function simpanMenuUtamaBaru() {
 			var judul_menu_utama_baru = $('#judul_menu_utama_baru').val();
 			$.ajax({
@@ -110,6 +127,7 @@
 				success: function() {
 					alert('Berhasil disimpan');
 					tampil_menu_utama();
+					list_menu_utama();
 				}
 			});
 		}
@@ -126,6 +144,7 @@
 				success: function() {
 					alert('Berhasil diubah');
 					tampil_menu_utama();
+					list_menu_utama();
 				}
 			});
 		}
@@ -139,6 +158,7 @@
 				success: function() {
 					alert('Berhasil di hapus');
 					tampil_menu_utama();
+					list_menu_utama();
 				}
 			});
 		}
@@ -167,4 +187,4 @@
 
 </head>
 
-<body class="bg-theme bg-theme9" style="height: 100%;">
+<body style="height: 100%;">

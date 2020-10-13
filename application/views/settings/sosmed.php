@@ -38,10 +38,10 @@
                                                         <td><?= $sm['sosmed'] ?></td>
                                                         <td class="text-center"><i class="<?= $sm['icon'] ?>"></i></td>
                                                         <td class="text-center">
-                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editSosmed" data-id="<?= $sm['id_sosmed'] ?>" data-sosmed="<?= $sm['sosmed'] ?>" data-icon="<?= $sm['icon'] ?>">
+                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editSosmed" data-id="<?= $sm['id_sosmed'] ?>" data-sosmed="<?= $sm['sosmed'] ?>" data-icon="<?= $sm['icon'] ?>" data-toggle="tooltip" data-placement="bottom" title="Edit Sosial Media">
                                                                 <i class="fas fa-pencil-alt"></i>
                                                             </button>
-                                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapusSosmed" data-id="<?= $sm['id_sosmed'] ?>" data-sosmed="<?= $sm['sosmed'] ?>">
+                                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapusSosmed" data-id="<?= $sm['id_sosmed'] ?>" data-sosmed="<?= $sm['sosmed'] ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus Sosial Media">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </td>

@@ -15,6 +15,9 @@
 
 <script type="text/javascript">
 	$(document).load(function() {
+		$(function() {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
 		// $('.carousel').carousel({
 		// 	interval: 5000
 		// });

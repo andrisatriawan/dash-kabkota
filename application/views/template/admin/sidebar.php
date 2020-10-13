@@ -6,7 +6,14 @@
 				<a href="<?= base_url('dashboard') ?>">
 					<div class="row">
 						<div class="col-3">
-							<img src="<?= base_url('assets/images/logo-kab/') . $logo ?>" class="logo-icon">
+							<?php
+							if ($logo == '') {
+								$logo_tampil = 'logo-provsu.png';
+							} else {
+								$logo_tampil  = $logo;
+							}
+							?>
+							<img src="<?= base_url('assets/images/logo-kab/') . $logo_tampil ?>" class="logo-icon">
 						</div>
 						<div class="col-9">
 							<?php
@@ -38,7 +45,7 @@
 				$id_role = $this->session->userdata('role');
 				$query = "SELECT * FROM `tb_menu`
 				JOIN `tb_akses_menu` ON `tb_menu`.`id_menu`=`tb_akses_menu`.`id_menu`
-				WHERE `tb_akses_menu`.`id_role` = $id_role";
+				WHERE `tb_akses_menu`.`id_role` = $id_role ORDER BY `tb_menu`.`judul_menu` ASC";
 				$menu_adm = $this->db->query($query)->result_array();
 				foreach ($menu_adm as $m_adm) :
 				?>

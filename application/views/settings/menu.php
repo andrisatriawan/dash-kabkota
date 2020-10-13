@@ -31,7 +31,11 @@
                             <div class="tab-content py-3">
                                 <!-- Table Menu -->
                                 <div class="tab-pane active" id="menu">
-                                    <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#List-Menu-Utama">Menu Utama</button>
+                                    <?php
+                                    if ($this->session->userdata('role') == 2) :
+                                    ?>
+                                        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#List-Menu-Utama">Menu Utama</button>
+                                    <?php endif; ?>
                                     <div class="table-responsive">
                                         <table class="table table-hover" id="menu-table">
                                             <thead>
@@ -71,10 +75,10 @@
                                                         <td><?= $judul_menu_utama ?></td>
                                                         <!-- <td class="text-center"><i class="<?= $m['icon'] ?>"></i></td> -->
                                                         <td class="text-center">
-                                                            <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editMenu" data-judul="<?= $m['judul_menu'] ?>" data-id="<?= $m['id_menu'] ?>" data-link="<?= $m['link'] ?>" data-icon="<?= $m['icon'] ?>" data-jenis="<?= $m['jenis_url'] ?>" data-tab="<?= $m['tab_baru'] ?>" data-menuutama="<?= $m['id_menu_utama'] ?>">
+                                                            <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editMenu" data-judul="<?= $m['judul_menu'] ?>" data-id="<?= $m['id_menu'] ?>" data-link="<?= $m['link'] ?>" data-icon="<?= $m['icon'] ?>" data-jenis="<?= $m['jenis_url'] ?>" data-tab="<?= $m['tab_baru'] ?>" data-menuutama="<?= $m['id_menu_utama'] ?>" data-toggle="tooltip" data-placement="bottom" title="Edit Menu">
                                                                 <i class="fas fa-pencil-alt"></i>
                                                             </button>
-                                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapusMenu" data-id="<?= $m['id_menu'] ?>" data-judul="<?= $m['judul_menu'] ?>">
+                                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapusMenu" data-id="<?= $m['id_menu'] ?>" data-judul="<?= $m['judul_menu'] ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus Menu">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </td>
@@ -105,11 +109,11 @@
                                         </div>
                                         <div id="url" class="form-group">
                                         </div>
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label for="icon">Icon Menu</label>
                                             <small><a href="https://fontawesome.com/icons?d=gallery" class="text-primary" target="blank"><i class="fas fa-eye"></i></a></small>
                                             <input type="text" class="form-control" id="icon" placeholder="Icon Menu" name="icon" value="<?= set_value('icon') ?>">
-                                        </div>
+                                        </div> -->
                                         <?php
                                         if ($this->session->userdata('role') == 2) :
                                         ?>
@@ -158,7 +162,7 @@
                                                             <td><?= $am['judul_menu'] ?></td>
                                                             <td><?= $am['level'] ?></td>
                                                             <td class="text-center">
-                                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapusAkses" data-id="<?= $am['id_akses'] ?>" data-judul="<?= $am['judul_menu'] ?>" data-role="<?= $am['level'] ?>">
+                                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapusAkses" data-id="<?= $am['id_akses'] ?>" data-judul="<?= $am['judul_menu'] ?>" data-role="<?= $am['level'] ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus Akses">
                                                                     <i class="fas fa-trash"></i>
                                                                 </button>
                                                             </td>
@@ -206,12 +210,12 @@
                     </div>
                     <div class="form-group" id="input-url">
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="edit-icon">Icon Menu</label>
                         <small><a href="https://fontawesome.com/icons?d=gallery" class="text-primary" target="blank"><i class="fas fa-eye"></i></a></small>
                         <input type="text" class="form-control" id="edit-icon" placeholder="Icon Menu" name="edit_icon" oninput="cekinput(this.value, 'pesan-edit-icon')">
                         <small class="text-danger pl-3" id="pesan-edit-icon" style="display: none;">Tidak boleh kosong</small>
-                    </div>
+                    </div> -->
                     <?php
                     if ($this->session->userdata('role') == 2) :
                     ?>
@@ -370,6 +374,7 @@
                 document.getElementById('add-menu-utama').innerHTML = '';
             }
         });
+
         $('#menu-utama-edit').change(function() {
             var nilai = $('#menu-utama-edit').val();
             if (nilai == 'add') {
@@ -380,6 +385,7 @@
                 document.getElementById('add-menu-utama-edit').innerHTML = '';
             }
         });
+
         $('#jenis-url').change(function() {
             var nilai = $('#jenis-url').val();
             if (nilai == 0) {
@@ -456,12 +462,12 @@
             ?>
                 menu_utama.push(['<?= $utama['id_menu_utama'] ?>', '<?= $utama['judul_menu_utama'] ?>']);
             <?php endforeach; ?>
-            console.log(jenis);
+            // console.log(jenis);
             var d = ``;
             var tampil = '';
             for (let i = 0; i < menu_utama.length; ++i) {
                 let hasil = menu_utama[i];
-                console.log(hasil[0, 0]);
+                // console.log(hasil[0, 0]);
                 if (hasil[0, 0] == menuutama) {
                     tampil = `<option value="${hasil[0,0]}" selected>${ hasil[0, 1] }</option>`;
                 } else {
@@ -476,7 +482,8 @@
             }
             var new_menu_utama = `<option value="add">Buat Menu Utama</option>`;
             d = tanpa_menu + d + new_menu_utama;
-            document.getElementById('menu-utama-edit').innerHTML = d;
+            $('#menu-utama-edit').html(d);
+            // document.getElementById('menu-utama-edit').innerHTML = d;
             if (jenis == 0) {
                 <?php
                 if ($this->session->userdata('role') == 1) {
@@ -521,6 +528,7 @@
             modal.find('#edit-link').val(link)
             modal.find('#edit-icon').val(icon)
         });
+
         $("#simpan-menu").click(function() {
             var data = $('#form-menu').serialize();
             $.ajax({
@@ -532,6 +540,7 @@
                 }
             });
         });
+
         $('#hapusMenu').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var judul = button.data('judul')
@@ -540,6 +549,7 @@
             modal.find('#text-pesan').text('Apakah anda yakin ingin menghapus user ' + judul + '?')
             modal.find('#btnHapus').attr('href', '<?= base_url('menu/delete/') ?>' + id_menu)
         });
+
         $("#updateMenu").click(function() {
             var data = $('#form-update-menu').serialize();
             $.ajax({
@@ -551,6 +561,7 @@
                 }
             });
         });
+
         $("#simpanAkses").click(function() {
             var data = $('#AddAccess').serialize();
             $.ajax({
@@ -562,6 +573,7 @@
                 }
             });
         });
+
         $('#hapusAkses').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id_akses = button.data('id')
@@ -571,18 +583,7 @@
             modal.find('#text-pesan').text('Apakah anda yakin ingin menghapus akses menu ' + judul + ' untuk ' + role + '?')
             modal.find('#btnHapusAkses').attr('href', '<?= base_url('akses/delete/') ?>' + id_akses)
         });
+
         $('.alert').alert();
-        $('#coba-coba').click(function() {
-            let menu_utama = [];
-            <?php
-            $menu_utama = $this->db->get_where('tb_menu_utama', ['id_kab' => $this->session->userdata('id_kab')])->result_array();
-            foreach ($menu_utama as $utama) :
-            ?>
-                menu_utama.push(['<?= $utama['id_menu_utama'] ?>', '<?= $utama['judul_menu_utama'] ?>']);
-            <?php endforeach; ?>
-            console.table(menu_utama);
-            console.log(menu_utama);
-            console.log('Test dipanggil');
-        });
     });
 </script>

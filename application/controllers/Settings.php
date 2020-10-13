@@ -147,11 +147,11 @@ class Settings extends CI_Controller
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger p-2" role="alert">Gagal disimpan!</div>');
             $this->menu();
         } else {
-            if ($this->input->post('icon') == '') {
-                $icon = 'fas fa-stream';
-            } else {
-                $icon = $this->input->post('icon');
-            }
+            // if ($this->input->post('icon') == '') {
+            //     $icon = 'fas fa-stream';
+            // } else {
+            //     $icon = $this->input->post('icon');
+            // }
 
             if ($this->input->post('tab_baru') == '') {
                 $tab_baru = 'N';
@@ -180,7 +180,7 @@ class Settings extends CI_Controller
                 'jenis_url' => $this->input->post('jenis_url'),
                 'link' => $this->input->post('link'),
                 'tab_baru' => $tab_baru,
-                'icon' => $icon
+                // 'icon' => $icon
             ];
             $this->db->insert('tb_menu', $data);
             $this->session->set_flashdata('pesan', '<div class="alert alert-success p-2" role="alert">Berhasil disimpan!
@@ -234,11 +234,11 @@ class Settings extends CI_Controller
             </button>
             </div>');
         } else {
-            if ($this->input->post('edit_icon') == '') {
-                $icon = 'fas fa-stream';
-            } else {
-                $icon = $this->input->post('edit_icon');
-            }
+            // if ($this->input->post('edit_icon') == '') {
+            //     $icon = 'fas fa-stream';
+            // } else {
+            //     $icon = $this->input->post('edit_icon');
+            // }
 
             if ($this->input->post('tab_baru_edit') != 'Y') {
                 $tab_baru = 'N';
@@ -266,7 +266,7 @@ class Settings extends CI_Controller
                 'judul_menu' => $this->input->post('edit_judul_menu'),
                 'link' => $this->input->post('edit_link'),
                 'tab_baru' => $tab_baru,
-                'icon' => $icon
+                // 'icon' => $icon
             ];
             $this->db->where('id_menu', $id_menu);
             $this->db->update('tb_menu', $data);

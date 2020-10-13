@@ -14,14 +14,14 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="javascript:void();" data-target="#tambah-user" data-toggle="pill" class="nav-link" id="link-tambah-user">
-                                        <i class="fas fa-plus-circle"></i> <span class="hidden-xs">Tambah Menu</span>
+                                        <i class="fas fa-plus-circle"></i> <span class="hidden-xs">Tambah Users</span>
                                     </a>
                                 </li>
                             </ul>
                             <div class="tab-content py-3">
                                 <div class="tab-pane active" id="users">
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-hover" id="menu-table">
+                                        <table class="table table-sm table-hover" id="users-table">
                                             <thead>
                                                 <tr class="text-center">
                                                     <th scope="col">#</th>
@@ -49,7 +49,7 @@
                                                         <td><?= $user['username'] ?></td>
                                                         <td><?= $status ?></td>
                                                         <td>
-                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editUser" data-id="<?= $user['id_user'] ?>" data-username="<?= $user['username'] ?>"><i class="fas fa-pencil-alt"></i></button>
+                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editUser" data-id="<?= $user['id_user'] ?>" data-username="<?= $user['username'] ?>" data-toggle="tooltip" data-placement="bottom" title="Edit Akun"><i class="fas fa-pencil-alt"></i></button>
                                                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapusUser" data-id="<?= $user['id_user'] ?>" data-username="<?= $user['username'] ?>" disabled><i class="fas fa-trash"></i></button>
                                                         </td>
                                                     </tr>

@@ -3,114 +3,29 @@
         <div class="row mt-3">
             <div class="col-xl-10">
                 <div class="card">
+                    <div class="card-header bg-light">
+                        <h3>Ubah Password</h3>
+                    </div>
                     <div class="card-body">
                         <div class="card-content px-3">
-                            <?= $this->session->flashdata('pesan'); ?>
-                            <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
-                                <li class="nav-item">
-                                    <a href="javascript:void();" data-target="#users" data-toggle="pill" class="nav-link active" id="link-users">
-                                        <i class="fas fa-info-circle"></i> <span class="hidden-xs">Data Users</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="javascript:void();" data-target="#tambah-user" data-toggle="pill" class="nav-link" id="link-tambah-user">
-                                        <i class="fas fa-plus-circle"></i> <span class="hidden-xs">Tambah Menu</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="tab-content py-3">
-                                <div class="tab-pane active" id="users">
-                                    <div class="table-responsive">
-                                        <table class="table table-sm table-hover" id="menu-table">
-                                            <thead>
-                                                <tr class="text-center">
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Kab/Kota</th>
-                                                    <th scope="col">Username</th>
-                                                    <th scope="col">Jenis User</th>
-                                                    <th scope="col">Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                $i = 1;
-                                                foreach ($users as $user) :
-                                                    $id_kab = $user['id_kab'];
-                                                    $kab = $this->db->get_where('tb_kab', ['id_kab' => $id_kab])->row_array();
-                                                    if ($user['id_role'] == 1) {
-                                                        $status = 'Super Admin';
-                                                    } else {
-                                                        $status = 'Admin Kab/Kota';
-                                                    }
-                                                ?>
-                                                    <tr class="text-center">
-                                                        <td><?= $i++; ?></td>
-                                                        <td><?= $kab['nama'] ?></td>
-                                                        <td><?= $user['username'] ?></td>
-                                                        <td><?= $status ?></td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editUser" data-id="<?= $user['id_user'] ?>" data-username="<?= $user['username'] ?>"><i class="fas fa-pencil-alt"></i></button>
-                                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapusUser" data-id="<?= $user['id_user'] ?>" data-username="<?= $user['username'] ?>" disabled><i class="fas fa-trash"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                <?php
-                                                endforeach;
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            <form id="form-update">
+                                <div class="form-group">
+                                    <label for="edit_user">Password Lama</label>
+                                    <input type="text" class="form-control" id="edit_user" placeholder="Password Lama" name="edit_user">
+                                    <input type="hidden" class="form-control" id="id_user" name="id_user">
+                                    <input type="hidden" class="form-control" id="edit_user">
                                 </div>
-                                <div class="tab-pane" id="tambah-user">
-                                    <form method="post" action="">
-                                        <div class="form-group">
-                                            <label for="role">Role</label>
-                                            <select id="role" class="form-control" name="role">
-                                                <option value="" selected>Pilih</option>
-                                                <?php
-                                                foreach ($role as $level) :
-                                                ?>
-                                                    <option value="<?= $level['id_role']; ?>"><?= $level['level'] ?></option>
-                                                <?php
-                                                endforeach;
-                                                ?>
-                                            </select>
-                                            <?= form_error('role', '<small class="text-danger pl-3">', '</small>') ?>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="kab">Kabupaten/Kota</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <select id="jenis_kab" class="form-control" onchange="getKab(this.value)">
-                                                        <option value="" selected>Pilih</option>
-                                                    </select>
-                                                </div>
-                                                <select id="kab" class="form-control" name="kabupaten" onchange="cekKab(this.value)">
-                                                    <option value="" selected></option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div id="cek-kab">
-                                            <div class="form-group">
-                                                <label for="username">Username</label>
-                                                <input type="text" class="form-control" id="username" placeholder="Username" name="username" value="<?= set_value('username') ?>">
-                                                <?= form_error('username', '<small class="text-danger pl-3">', '</small>') ?>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="password">Password</label>
-                                                <input type="password" class="form-control" id="password" placeholder="Password" name="password" oninput="cekpassword()">
-                                                <small class="text-danger pl-3" id="pesan1" style="display: none;">Panjang password minimal 8 karakter</small>
-                                            </div>
-                                            <div class="form-group mb-4">
-                                                <label for="password">Ulangi Password</label>
-                                                <input type="password" class="form-control" id="password1" placeholder="Ulangi Password" name="password1" oninput="cekpassword()">
-                                                <small class="text-danger pl-3" id="pesan" style="display: none;">Password tidak cocok</small>
-                                            </div>
-                                            <button type="submit" class="btn btn-light btn-block waves-effect waves-light">Simpan</button>
-                                        </div>
-                                    </form>
+                                <div class="form-group">
+                                    <label for="edit_password">Password</label>
+                                    <input type="password" class="form-control" id="edit_password" placeholder="Password" name="edit_password" oninput="cekpasswordedit()">
+                                    <small class="text-danger pl-3" id="edit_pesan" style="display: none;">Panjang password minimal 8 karakter</small>
                                 </div>
-                            </div>
-
+                                <div class="form-group mb-4">
+                                    <label for="edit_password1">Ulangi Password</label>
+                                    <input type="password" class="form-control" id="edit_password1" placeholder="Ulangi Password" name="edit_password1" oninput="cekpasswordedit()">
+                                    <small class="text-danger pl-3" id="edit_pesan1" style="display: none;">Password tidak cocok</small>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -124,65 +39,6 @@
 
 </div>
 <!--End wrapper-->
-
-
-<!-- Modal Edit -->
-<div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="background-color: rgba(0,0,0, 1);">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editUserLabel">New message</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="form-update">
-                    <div class="form-group">
-                        <label for="edit_user">Username</label>
-                        <input type="text" class="form-control" id="edit_user" placeholder="Username" name="edit_user">
-                        <input type="hidden" class="form-control" id="id_user" name="id_user">
-                        <input type="hidden" class="form-control" id="edit_user">
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_password">Password</label>
-                        <input type="password" class="form-control" id="edit_password" placeholder="Password" name="edit_password" oninput="cekpasswordedit()">
-                        <small class="text-danger pl-3" id="edit_pesan" style="display: none;">Panjang password minimal 8 karakter</small>
-                    </div>
-                    <div class="form-group mb-4">
-                        <label for="edit_password1">Ulangi Password</label>
-                        <input type="password" class="form-control" id="edit_password1" placeholder="Ulangi Password" name="edit_password1" oninput="cekpasswordedit()">
-                        <small class="text-danger pl-3" id="edit_pesan1" style="display: none;">Password tidak cocok</small>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id="updateUser" class="btn btn-primary">Simpan</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Hapus -->
-<div class="modal fade" id="hapusUser" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="background-color: rgba(0,0,0, 1);">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p id="text-pesan">Apakah anda yakin ingin menghapus</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a href="#" id="btnHapus" class="btn btn-danger">Hapus</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
     function cekpasswordedit() {

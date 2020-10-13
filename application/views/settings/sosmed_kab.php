@@ -39,10 +39,10 @@
                                                         <td class="text-center"><?= $sosmed ?></td>
                                                         <td><?= $sm['link'] ?></td>
                                                         <td class="text-center">
-                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editSosmed" data-id="<?= $sm['id'] ?>" data-sosmed="<?= $sosmed ?>" data-link="<?= $sm['link'] ?>">
+                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editSosmed" data-id="<?= $sm['id'] ?>" data-sosmed="<?= $sosmed ?>" data-link="<?= $sm['link'] ?>" data-toggle="tooltip" data-placement="bottom" title="Edit Sosial Media">
                                                                 <i class="fas fa-pencil-alt"></i>
                                                             </button>
-                                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapusSosmed" data-id="<?= $sm['id'] ?>" data-sosmed="<?= $sosmed ?>">
+                                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapusSosmed" data-id="<?= $sm['id'] ?>" data-sosmed="<?= $sosmed ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus Sosial Media">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </td>
@@ -132,7 +132,7 @@
                 <form method="post" id="FormAddSosmed">
                     <div class="form-group">
                         <label for="sosmed">Sosmed</label>
-                        <select name="sosmed" id="sosmed" class="form-control">
+                        <select name="sosmed" id="pilih-sosmed" class="form-control">
                             <option value="">Pilih</option>
                             <?php
                             $a_sosmed = $this->db->get('tb_sosmed')->result_array();
@@ -199,6 +199,21 @@
             var modal = $(this)
             modal.find('#text-pesan').text('Apakah anda yakin ingin menghapus sosial media ' + sosmed + '?')
             modal.find('#btnHapus').attr('href', '<?= base_url('sosmed/delete/') ?>' + id_sosmed)
+        });
+        $('#pilih-sosmed').change(function() {
+            var sosmed = $('#pilih-sosmed').val();
+            $.ajax({
+                type: 'POST',
+                url: url1 + 'settings/getSosmed/' + sosmed,
+                success: function(data) {
+                    if (data == 1) {
+
+                    } else {
+
+                    }
+                    // $(location).attr('href', url1 + 'settings/sosmed');
+                }
+            });
         });
     });
 </script>
