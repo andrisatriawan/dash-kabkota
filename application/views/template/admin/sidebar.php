@@ -144,7 +144,7 @@
 							} else {
 							?>
 								<li>
-									<a href="<?= base_url('kab/' . $username . '/page?url=') . $m['link'] ?>">
+									<a href="<?= base_url('kab/' . $username . '/page?url=') . $m['link'] ?>" target="_blank">
 										<!-- <i class="<?= $m['icon'] ?>"></i> -->
 										<span><?= $m['judul_menu'] ?></span>
 									</a>

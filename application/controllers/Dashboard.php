@@ -25,6 +25,13 @@ class Dashboard extends CI_Controller
     function _template($loc, $data)
     {
         $data['kab'] = $this->kab();
+
+        $logo = $this->db->get_where('tb_informasi', ['id_kab' => $this->session->userdata('id_kab')]);
+        if ($logo->row('logo') != '') {
+            $data['logo'] = $logo->row('logo');
+        } else {
+            $data['logo'] = 'logo-provsu.png';
+        }
         $this->load->view('template/header', $data);
         $this->load->view('template/admin/sidebar');
         $this->load->view($loc, $data);

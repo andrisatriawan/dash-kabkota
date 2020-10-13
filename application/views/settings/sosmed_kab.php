@@ -142,9 +142,8 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="link">Link</label>
-                        <input type="text" name="link" id="link" class="form-control">
+                    <div class="form-group" id='tampil-link'>
+
                     </div>
                 </form>
             </div>
@@ -202,15 +201,22 @@
         });
         $('#pilih-sosmed').change(function() {
             var sosmed = $('#pilih-sosmed').val();
+            var html = '';
             $.ajax({
                 type: 'POST',
+                data: sosmed,
                 url: url1 + 'settings/getSosmed/' + sosmed,
-                success: function(data) {
-                    if (data == 1) {
-
+                success: function(cek) {
+                    if (cek != 0) {
+                        alert('Sosial media sudah ada!');
+                        html = '';
+                        $('#simpanSosmed').prop('disabled', true);
                     } else {
-
+                        html = `<label for="link">Link</label>
+                        <input type="text" name="link" id="link" class="form-control">`;
+                        $('#simpanSosmed').prop('disabled', false);
                     }
+                    $('#tampil-link').html(html);
                     // $(location).attr('href', url1 + 'settings/sosmed');
                 }
             });

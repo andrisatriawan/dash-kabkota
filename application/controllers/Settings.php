@@ -26,7 +26,13 @@ class Settings extends CI_Controller
     function _template($loc, $data)
     {
         $data['kab'] = $this->kab();
-        $data['logo'] = $this->db->get_where('tb_informasi', ['id_kab' => $this->session->userdata('id_kab')])->row('logo');
+        $logo = $this->db->get_where('tb_informasi', ['id_kab' => $this->session->userdata('id_kab')]);
+        if ($logo->row('logo') != '') {
+            $data['logo'] = $logo->row('logo');
+        } else {
+            $data['logo'] = 'logo-provsu.png';
+        }
+
         $this->load->view('template/header', $data);
         $this->load->view('template/admin/sidebar', $data);
         $this->load->view($loc, $data);
@@ -488,6 +494,14 @@ class Settings extends CI_Controller
                 redirect(base_url('settings/sosmed'));
             }
         }
+    }
+
+    public function getSosmed($sosmed)
+    {
+        $id_kab = $this->session->userdata('id_kab');
+        $this->db->where('id_kab', $id_kab);
+        $this->db->where('id_sosmed', $sosmed);
+        echo $this->db->get('tb_sosmed_kab')->num_rows();
     }
 
     // Menu Utama
