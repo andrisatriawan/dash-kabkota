@@ -113,8 +113,22 @@ class Settings extends CI_Controller
 
     public function ubah_password()
     {
+        $id_kab = $this->session->userdata('id_kab');
         $data['header'] = 'Ubah Password';
+        $data['users'] = $this->db->get_where('tb_users', ['id_kab' => $id_kab]);
         $this->_template('settings/ubahpassword', $data);
+    }
+
+    public function validasiPass($id)
+    {
+        $pass = $this->input->post('old_password');
+        $this->db->where('id_user', $id);
+        $user = $this->db->get('tb_users')->row_array();
+        if (password_verify($pass, $user['password'])) {
+            echo 'Y';
+        } else {
+            echo 'alert("")';
+        }
     }
 
     // Manajemen Menu

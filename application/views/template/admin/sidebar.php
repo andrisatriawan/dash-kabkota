@@ -156,6 +156,12 @@
 				endif; ?>
 				<li class="sidebar-header">Akun</li>
 				<li>
+					<a href="<?= base_url('settings/ubah_password') ?>">
+						<!-- <i class="fas fa-sign-out-alt"></i> -->
+						<span>Ubah Password</span>
+					</a>
+				</li>
+				<li>
 					<a href="<?= base_url('auth/logout') ?>">
 						<!-- <i class="fas fa-sign-out-alt"></i> -->
 						<span>Logout</span>
