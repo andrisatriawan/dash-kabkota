@@ -7,7 +7,7 @@ class M_informasi extends CI_Model
     {
         $config['upload_path'] = $folder;
         $config['file_name'] = $nama;
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $config['max_size'] = 2048;
         $config['overwrite'] = true;
 
