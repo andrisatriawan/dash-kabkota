@@ -15,10 +15,12 @@
                                 <div class="form-group">
                                     <label for="username">Username</label>
                                     <input type="text" class="form-control" id="username" placeholder="Username" value="<?= $user['username'] ?>" disabled>
+                                    <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+                                    <input type="hidden" name="edit_user" value="<?= $user['username'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="old_password">Password Lama</label>
-                                    <input type="text" class="form-control" id="old_password" placeholder="Password Lama" name="old_password">
+                                    <input type="password" class="form-control" id="old_password" placeholder="Password Lama" name="old_password">
                                 </div>
                                 <div class="form-group">
                                     <label for="edit_password">Password Baru</label>
@@ -91,7 +93,7 @@
     $(document).ready(function() {
         $('table').DataTable();
 
-        function cekpasslama() {
+        function upadatepass() {
             var id_user = <?= $user['id_user'] ?>;
             var data = $('#form-update').serialize();
             // var hasil = '';
@@ -100,24 +102,44 @@
                 url: BASE_URL + 'settings/validasiPass/' + id_user,
                 data: data,
                 success: function(cek) {
-                    return cek;
+                    if (cek == 'N') {
+                        alert('Password tidak sesuai');
+                        $('#old_password').focus();
+                        $('#edit_password').val('');
+                        $('#edit_password1').val('');
+                    } else {
+                        $.ajax({
+                            type: 'POST',
+                            url: BASE_URL + 'user/update',
+                            data: data,
+                            success: function() {
+                                alert('berhasil diubah');
+                                $('#old_password').val('');
+                                $('#edit_password').val('');
+                                $('#edit_password1').val('');
+                            }
+                        })
+                    }
                 }
             });
-
         }
         $('#update-password').click(function() {
-            var cek = cekpasslama();
-            console.log(cek);
-            // var url1 = '<?= base_url() ?>';
-            // var data = $('#form-update').serialize();
-            // $.ajax({
-            //     type: 'POST',
-            //     url: url1 + 'user/update',
-            //     data: data,
-            //     success: function() {
-            //         $(location).attr('href', url1 + 'settings/users');
-            //     }
-            // })
+            var old_password = $('#old_password').val();
+            var password1 = $('#edit_password').val();
+            var password2 = $('#edit_password1').val();
+            if (old_password == '') {
+                alert('Isi password lama');
+                $('#old_password').focus();
+            } else if (password1 == '') {
+                alert('Password tidak boleh kosong')
+                $('#edit_password').focus();
+            } else if (password1 != password2) {
+                alert('Ulangi password tidak sama');
+                $('#edit_password1').val('');
+                $('#edit_password1').focus();
+            } else {
+                upadatepass()
+            }
         });
     });
 </script>

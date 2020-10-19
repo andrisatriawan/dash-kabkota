@@ -127,7 +127,7 @@ class Settings extends CI_Controller
         if (password_verify($pass, $user['password'])) {
             echo 'Y';
         } else {
-            echo 'alert("")';
+            echo 'N';
         }
     }
 
