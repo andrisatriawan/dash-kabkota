@@ -39,13 +39,15 @@
                                                     $kab = $this->db->get_where('tb_kab', ['id_kab' => $id_kab])->row_array();
                                                     if ($user['id_role'] == 1) {
                                                         $status = 'Super Admin';
+                                                        $nama = 'Super Admin';
                                                     } else {
                                                         $status = 'Admin Kab/Kota';
+                                                        $nama = $kab['nama'];
                                                     }
                                                 ?>
                                                     <tr class="text-center">
                                                         <td><?= $i++; ?></td>
-                                                        <td><?= $kab['nama'] ?></td>
+                                                        <td><?= $nama ?></td>
                                                         <td><?= $user['username'] ?></td>
                                                         <td><?= $status ?></td>
                                                         <td>
