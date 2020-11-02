@@ -39,17 +39,24 @@
 	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/plugins/DataTables/datatables.min.css" />
 	<script type="text/javascript" src="<?= base_url() ?>assets/plugins/DataTables/datatables.min.js"></script>
 
-	<link href="<?= base_url() ?>assets/js/highcharts/highcharts-editor.min.css" rel="stylesheet" type="text/css" />
+
 	<script src="http://code.highcharts.com/stock/highstock.js" type="text/javascript" charset="utf-8"></script>
-	<script src="https://code.highcharts.com/modules/data.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://code.highcharts.com/maps/modules/map.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="https://code.highcharts.com/adapters/standalone-framework.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://code.highcharts.com/highcharts-more.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://code.highcharts.com/highcharts-3d.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://code.highcharts.com/modules/data.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script src="https://code.highcharts.com/modules/funnel.js"></script>
 	<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-	<script src="<?= base_url() ?>assets/js/highcharts/highcharts-editor.min.js"></script>
-	<script src="<?= base_url() ?>assets/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+	<script src="<?= base_url() ?>assets/js/highcharts/highcharts-editor.complete.js"></script>
+	<link href="<?= base_url() ?>assets/js/highcharts/highcharts-editor.min.css" rel="stylesheet" type="text/css" />
+
+	<!-- <script src="<?= base_url() ?>assets/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script> -->
+	<script src="https://cdn.tiny.cloud/1/9m8au7d4mc1co46up0agy9dlvv3j38so9rsbhpcfrnpunsoh/tinymce/4/tinymce.min.js"></script>
 	<script src="<?= base_url() ?>assets/js/highcharts/highcharts-editor.tinymce.js"></script>
 
 	<script type="text/javascript">
@@ -192,19 +199,30 @@
 				'searchreplace visualblocks code fullscreen',
 				'insertdatetime media table paste code help wordcount',
 				'highcharts highchartssvg noneditable'
+				// 'pageembed code preview'
 			],
 			toolbar: 'undo redo | formatselect | ' +
 				'bold italic backcolor | alignleft aligncenter ' +
 				'alignright alignjustify | bullist numlist outdent indent | ' +
 				'removeformat | help',
+			// 'pageembed code preview',
 			content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-			menubar: "file edit insert view format table tools help highcharts",
-			menu: {
-				highcharts: {
-					title: "Highcharts",
-					items: "highcharts"
-				}
-			}
+			// tiny_pageembed_classes: [{
+			// 		text: 'Big embed',
+			// 		value: 'my-big-class'
+			// 	},
+			// 	{
+			// 		text: 'Small embed',
+			// 		value: 'my-small-class'
+			// 	}
+			// ]
+			// menubar: "file edit insert view format table tools help highcharts",
+			// menu: {
+			// 	highcharts: {
+			// 		title: "Highcharts",
+			// 		items: "highcharts"
+			// 	}
+			// }
 		});
 	</script>
 
