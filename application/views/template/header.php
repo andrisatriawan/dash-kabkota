@@ -56,8 +56,6 @@
 	<link href="<?= base_url() ?>assets/js/highcharts/highcharts-editor.min.css" rel="stylesheet" type="text/css" />
 
 	<script src="<?= base_url() ?>assets/js/tinymce-4/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
-	<!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/4/tinymce.min.js" referrerpolicy="origin"></script>
-	<script src="https://cdn.tiny.cloud/1/9m8au7d4mc1co46up0agy9dlvv3j38so9rsbhpcfrnpunsoh/tinymce/4/tinymce.min.js"></script> -->
 	<script src="<?= base_url() ?>assets/js/highcharts/highcharts-editor.tinymce.js"></script>
 
 	<script type="text/javascript">

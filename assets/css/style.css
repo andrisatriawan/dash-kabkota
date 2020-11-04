@@ -1,17 +1,21 @@
-body{
-	background: rgb(255,220,176);
-	background: linear-gradient(273deg, rgba(255,220,176,1) 0%, rgba(227,219,185,1) 29%, rgba(180,157,58,1) 100%);
+body {
+	background: rgb(255, 220, 176);
+	background: linear-gradient(273deg, rgba(255, 220, 176, 1) 0%, rgba(227, 219, 185, 1) 29%, rgba(180, 157, 58, 1) 100%);
 	color: #000000;
 }
-label{
+
+label {
 	color: black;
 }
-table{
+
+table {
 	color: black;
 }
-.table{
+
+.table {
 	color: black;
 }
+
 .img-card {
 	position: absolute;
 	top: -50px;
@@ -34,107 +38,142 @@ table{
 	visibility: visible;
 }
 
-.as-input-file{
+.as-input-file {
 	background-color: rgba(255, 255, 255, 0.2);
 	border: 0px solid #e5eaef;
 	color: #fff !important;
 	display: block;
 	width: 90%;
 	border-radius: .25rem;
-	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
-input[type="file" i] {
+
+input[type="file"i] {
 	padding: 10px;
 }
-.custom-file-label::after{
+
+.custom-file-label::after {
 	height: auto;
 	content: "Pilih File";
 }
-.custom-file-label{
+
+.custom-file-label {
 	height: calc(1.5em + .75rem + 2px);
 }
 
-.alert-dismissible .close{
+.alert-dismissible .close {
 	padding: .48rem;
 	top: 0;
 }
 
-.brand-logo{
+.brand-logo {
 	padding: 20px;
 	height: 100px;
 	background-color: #964e06;
 }
 
-.logo-icon{
+.logo-icon {
 	width: 50px;
 }
 
-.logo-text{
+.logo-text {
 	position: static;
 	display: block;
 	line-height: normal;
 	padding: 10px 0;
 }
 
-#sidebar-wrapper{
+#sidebar-wrapper {
 	background-color: #964e06ab;
 }
 
-.sidebar-menu>li>a{
+.sidebar-menu>li>a {
 	padding-left: 30px;
 }
 
-.topbar-nav .navbar{
+.topbar-nav .navbar {
 	background-color: rgba(99, 52, 6, 0.692);
 }
 
-.card{
-	background: rgb(217,116,22);
-background: linear-gradient(41deg, rgba(217,116,22,1) 0%, rgba(181,160,69,1) 78%);
+.card {
+	background: rgb(217, 116, 22);
+	background: linear-gradient(41deg, rgba(217, 116, 22, 1) 0%, rgba(181, 160, 69, 1) 78%);
 	color: black;
 }
 
-.semat-url{
+.semat-url {
 	width: 100% !important;
 	height: 150px !important;
 	border: 5px solid #fff !important;
 }
 
-.bg-dark{
+.bg-dark {
 	background-color: rgb(99, 52, 6) !important;
 }
 
-.sidebar-menu li a i:last-child{
+.sidebar-menu li a i:last-child {
 	font-size: large;
 }
 
-.simplebar-content{
+.simplebar-content {
 	padding-bottom: 100px !important;
 	background-color: #964e06;
 }
 
-@media only screen and (max-width: 1024px){
-	#sidebar-wrapper{
+@media only screen and (max-width: 1024px) {
+	#sidebar-wrapper {
 		background-color: #964e06;
 	}
 }
 
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	color: #000000;
 }
 
-.modal-content{
-	background: rgb(139,86,36);
-	background: linear-gradient(41deg, rgba(139,86,36,1) 0%, rgba(180,157,58,1) 78%);
+.modal-content {
+	background: rgb(139, 86, 36);
+	background: linear-gradient(41deg, rgba(139, 86, 36, 1) 0%, rgba(180, 157, 58, 1) 78%);
 }
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
 	color: #f5f5f5;
 }
 
-.nav-tabs .nav-link{
+.nav-tabs .nav-link {
 	color: #000000;
 }
 
-.text-danger{
+.text-danger {
 	color: #8b0000 !important;
+}
+
+.bg-group {
+	/* background-color: rgba(255, 255, 255, 0.2);
+	border-radius: 5px; */
+	margin-bottom: 10px;
+}
+
+legend {
+	margin-bottom: 0;
+}
+
+.card-sosmed {
+	background-color: rgba(255, 255, 255, 0.2);
+	border-radius: 5px;
+}
+
+.as-h4 {
+	margin-bottom: 0;
 }

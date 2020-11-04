@@ -474,7 +474,7 @@ class Settings extends CI_Controller
                 <span aria-hidden="true">&times;</span>
                 </button>
                 </div>');
-                redirect(base_url('settings/sosmed'));
+                redirect(base_url('informasi'));
             } else {
                 $this->db->where('id_sosmed', $id);
                 $this->db->delete('tb_sosmed');
@@ -484,7 +484,7 @@ class Settings extends CI_Controller
                 <span aria-hidden="true">&times;</span>
                 </button>
                 </div>');
-                redirect(base_url('settings/sosmed'));
+                redirect(base_url('informasi'));
             }
         } else {
             $cek = $this->db->get_where('tb_sosmed_kab', ['id' => $id])->num_rows();
@@ -495,7 +495,7 @@ class Settings extends CI_Controller
                 <span aria-hidden="true">&times;</span>
                 </button>
                 </div>');
-                redirect(base_url('settings/sosmed'));
+                redirect(base_url('informasi'));
             } else {
                 $this->db->where('id', $id);
                 $this->db->delete('tb_sosmed_kab');
@@ -505,7 +505,7 @@ class Settings extends CI_Controller
                 <span aria-hidden="true">&times;</span>
                 </button>
                 </div>');
-                redirect(base_url('settings/sosmed'));
+                redirect(base_url('informasi'));
             }
         }
     }
